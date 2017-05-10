@@ -1,0 +1,12 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs
+/packages
+/src/AM.Core.Algorithms.Search/bin/
+/src/AM.Core.Algorithms.Search/obj/
+/src/AM.Core.DataStructures/bin/
+/src/AM.Core.DataStructures/obj/
+/test/AM.Core.Algorithms.Tests/bin/
+/test/AM.Core.Algorithms.Tests/obj/
