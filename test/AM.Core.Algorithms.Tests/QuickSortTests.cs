@@ -9,44 +9,21 @@ namespace AM.Core.Algorithms.Tests
     {
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
-        public void Sort_ThrowsForNullArgument()
+        public void QuickSort_ThrowsForNullArgument()
         {
             QuickSort.Sort(null);
         }
 
         [TestMethod]
-        public void Sort_LeavesASortedArraySorted()
+        public void QuickSort_LeavesASortedArraySorted()
         {
-            int[] sourceArray = new[] { 1, 2, 3 };
-            int[] actualArray = new int[sourceArray.Length];
-            sourceArray.CopyTo(actualArray, 0);
-
-            QuickSort.Sort(actualArray);
-
-            AssertEqualArrays(sourceArray, actualArray);
+            GenericSortingAlgorithmTests.ValidateSort_LeavesASortedArraySourted(QuickSort.Sort);
         }
 
         [TestMethod]
-        public void Sort_SortsAnUnsortedArray()
+        public void QuickSort_SortsAnUnsortedArray()
         {
-            int[] actualArray = new[] { 3, 2, 1 };
-
-            QuickSort.Sort(actualArray);
-
-            AssertEqualArrays(new[] { 1, 2, 3 }, actualArray);
-        }
-
-        /// <summary>
-        /// Ensures that the specified arrays have the same elements in the same order.
-        /// </summary>
-        private static void AssertEqualArrays(int[] sourceArray, int[] actualArray)
-        {
-            Assert.AreEqual(sourceArray.Length, actualArray.Length);
-
-            for (int i = 0; i < sourceArray.Length; i++)
-            {
-                Assert.AreEqual(sourceArray[i], actualArray[i]);
-            }
+            GenericSortingAlgorithmTests.Validate_SortsAnUnsortedArray(QuickSort.Sort);
         }
     }
 }

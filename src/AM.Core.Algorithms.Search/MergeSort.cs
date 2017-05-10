@@ -1,9 +1,16 @@
-﻿namespace AM.Core.Algorithms.Search
+﻿using System;
+
+namespace AM.Core.Algorithms.Search
 {
     public static class MergeSort
     {
         public static void Sort(int[] array)
         {
+            if (array == null)
+            {
+                throw new ArgumentNullException(nameof(array));
+            }
+
             Sort(array, 0, array.Length - 1);
         }
 
