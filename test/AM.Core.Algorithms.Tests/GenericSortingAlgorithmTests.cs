@@ -7,7 +7,7 @@ namespace AM.Core.Algorithms.Tests
     {
         public static void ValidateSort_LeavesASortedArraySourted(Action<int[]> sortLogic)
         {
-            int[] sourceArray = new[] { 1, 2, 3 };
+            int[] sourceArray = new[] { 1, 2, 3, 4, 5, 6 };
             int[] actualArray = new int[sourceArray.Length];
             sourceArray.CopyTo(actualArray, 0);
 
@@ -25,10 +25,15 @@ namespace AM.Core.Algorithms.Tests
             AssertEqualArrays(new[] { 1, 2, 3 }, actualArray);
         }
 
+        public static void Validate_SortEmptyArraySucceeds(Action<int[]> sortLogic)
+        {
+            sortLogic(new int[] { });
+        }
+
         /// <summary>
         /// Ensures that the specified arrays have the same elements in the same order.
         /// </summary>
-        public static void AssertEqualArrays(int[] sourceArray, int[] actualArray)
+        private static void AssertEqualArrays(int[] sourceArray, int[] actualArray)
         {
             Assert.AreEqual(sourceArray.Length, actualArray.Length);
 

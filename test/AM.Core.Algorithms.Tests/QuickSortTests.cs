@@ -25,5 +25,11 @@ namespace AM.Core.Algorithms.Tests
         {
             GenericSortingAlgorithmTests.Validate_SortsAnUnsortedArray(QuickSort.Sort);
         }
+
+        [TestMethod]
+        public void QuickSort_SucceedsForEmptyArray()
+        {
+            GenericSortingAlgorithmTests.Validate_SortEmptyArraySucceeds(QuickSort.Sort);
+        }
     }
 }

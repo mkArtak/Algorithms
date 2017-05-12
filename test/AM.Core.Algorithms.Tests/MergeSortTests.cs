@@ -25,5 +25,11 @@ namespace AM.Core.Algorithms.Tests
         {
             GenericSortingAlgorithmTests.Validate_SortsAnUnsortedArray(MergeSort.Sort);
         }
+
+        [TestMethod]
+        public void MergeSort_SucceedsForEmptyArray()
+        {
+            GenericSortingAlgorithmTests.Validate_SortEmptyArraySucceeds(MergeSort.Sort);
+        }
     }
 }
