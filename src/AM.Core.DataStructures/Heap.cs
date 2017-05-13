@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace AM.Core.DataStructures
 {
-    public class Heap<T> where T : IComparable
+    public class Heap<T> where T : IComparable<T>
     {
-        private T[] items;
+        private readonly T[] items;
 
         public Heap(T[] items)
         {
@@ -23,76 +21,56 @@ namespace AM.Core.DataStructures
         private void Heapify(T[] items)
         {
             int lastParentIndex = GetParentIndex(items.Length - 1);
-
             for (int i = lastParentIndex; i >= 0; i--)
             {
-                FixTree(items, i);
-                PrintCurrent(items);
+                MaxHeapify(items, i);
             }
         }
 
-        private void PrintCurrent(T[] items)
+        private void MaxHeapify(T[] items, int parentIndex)
         {
-            string value = String.Join(" ", items);
-        }
-
-        private void FixTree(T[] items, int parentIndex)
-        {
-            if (parentIndex < items.Length && IsHeapCriteriaMaintainedForParent(items, parentIndex))
+            do
             {
-                return;
-            }
+                // A null value indicates that there is no swap required on current level.
+                int? childIndexToSwapRootWith = GetChildIndexToSwapWithParent(items, parentIndex);
+
+                if (!childIndexToSwapRootWith.HasValue)
+                {
+                    break;
+                }
+
+                Swap(items, parentIndex, childIndexToSwapRootWith.Value);
+                parentIndex = childIndexToSwapRootWith.Value;
+            } while (true);
+        }
+
+        private static int? GetChildIndexToSwapWithParent(T[] items, int parentIndex)
+        {
+            int? childIndexToSwapRootWith = null;
 
             int leftIndex = GetLeftChildIndex(parentIndex);
             int rightIndex = GetRightChildIndex(parentIndex);
 
-            bool hasLeftChildIndex = leftIndex < items.Length;
-            bool hasRightChildIndex = rightIndex < items.Length;
-            if (hasRightChildIndex && items[leftIndex].CompareTo(items[rightIndex]) < 0)
+            if (rightIndex < items.Length && items[leftIndex].CompareTo(items[rightIndex]) < 0)
             {
                 // Right child has bigger value than the left child
                 // If it's bigger than the parent's value, then swap those
                 if (items[rightIndex].CompareTo(items[parentIndex]) > 0)
                 {
-                    // Right child has bigger value than the parent.
-                    // Swap those to maintain the heap criteria.
-                    Swap(items, parentIndex, rightIndex);
-
-                    // Right index has a new value. Fix the subtree.
-                    FixTree(items, rightIndex);
+                    childIndexToSwapRootWith = rightIndex;
                 }
             }
-            else if (hasLeftChildIndex)
+            else if (leftIndex < items.Length)
             {
                 // left child has bigger value than the right child
                 // If it's bigger than the parent's value, then swap those
                 if (items[leftIndex].CompareTo(items[parentIndex]) > 0)
                 {
-                    // Left child has bigger value than the parent.
-                    // Swap those to maintain the heap criteria
-                    Swap(items, parentIndex, leftIndex);
-
-                    // Left index has a new value. Fix the subtree.
-                    FixTree(items, leftIndex);
+                    childIndexToSwapRootWith = leftIndex;
                 }
             }
-        }
 
-        private static bool IsHeapCriteriaMaintainedForParent(T[] array, int parentIndex)
-        {
-            int leftIndex = GetLeftChildIndex(parentIndex);
-            int rightIndex = GetRightChildIndex(parentIndex);
-
-            bool hasLeftChild = leftIndex < array.Length;
-            bool hasrightChild = rightIndex < array.Length;
-
-            bool result = true;
-            if ((hasLeftChild && array[parentIndex].CompareTo(array[leftIndex]) < 0) || (hasrightChild && array[parentIndex].CompareTo(array[rightIndex]) < 0))
-            {
-                result = false;
-            }
-
-            return result;
+            return childIndexToSwapRootWith;
         }
 
         private static void Swap(T[] array, int index1, int index2)
