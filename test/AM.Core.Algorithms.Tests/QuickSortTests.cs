@@ -11,25 +11,25 @@ namespace AM.Core.Algorithms.Tests
         [ExpectedException(typeof(ArgumentNullException))]
         public void QuickSort_ThrowsForNullArgument()
         {
-            QuickSort.Sort(null);
+            new QuickSort<int>().Sort(null);
         }
 
         [TestMethod]
         public void QuickSort_LeavesASortedArraySorted()
         {
-            GenericSortingAlgorithmTests.ValidateSort_LeavesASortedArraySourted(QuickSort.Sort);
+            GenericSortingAlgorithmTests.ValidateSort_LeavesASortedArraySourted(new QuickSort<int>().Sort);
         }
 
         [TestMethod]
         public void QuickSort_SortsAnUnsortedArray()
         {
-            GenericSortingAlgorithmTests.Validate_SortsAnUnsortedArray(QuickSort.Sort);
+            GenericSortingAlgorithmTests.Validate_SortsAnUnsortedArray(new QuickSort<int>().Sort);
         }
 
         [TestMethod]
         public void QuickSort_SucceedsForEmptyArray()
         {
-            GenericSortingAlgorithmTests.Validate_SortEmptyArraySucceeds(QuickSort.Sort);
+            GenericSortingAlgorithmTests.Validate_SortEmptyArraySucceeds(new QuickSort<int>().Sort);
         }
     }
 }

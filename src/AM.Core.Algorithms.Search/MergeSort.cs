@@ -2,9 +2,9 @@
 
 namespace AM.Core.Algorithms.Search
 {
-    public static class MergeSort
+    public class MergeSort<T> : ISortingAlgorithm<T> where T : IComparable<T>
     {
-        public static void Sort(int[] array)
+        public void Sort(T[] array)
         {
             if (array == null)
             {
@@ -14,7 +14,7 @@ namespace AM.Core.Algorithms.Search
             Sort(array, 0, array.Length - 1);
         }
 
-        private static void Sort(int[] array, int startIndex, int endIndex)
+        private static void Sort(T[] array, int startIndex, int endIndex)
         {
             if (startIndex >= endIndex)
             {
@@ -27,13 +27,13 @@ namespace AM.Core.Algorithms.Search
             Merge(array, startIndex, separatorIndex, endIndex);
         }
 
-        private static void Merge(int[] array, int startIndex, int separatorIndex, int endIndex)
+        private static void Merge(T[] array, int startIndex, int separatorIndex, int endIndex)
         {
             int firstArrayLength = separatorIndex - startIndex + 1;
             int secondArrayLength = endIndex - separatorIndex;
 
-            int[] firstArray = new int[firstArrayLength];
-            int[] secondArray = new int[secondArrayLength];
+            T[] firstArray = new T[firstArrayLength];
+            T[] secondArray = new T[secondArrayLength];
 
             for (int i = 0; i < firstArrayLength; i++)
             {
@@ -61,7 +61,7 @@ namespace AM.Core.Algorithms.Search
                 }
                 else
                 {
-                    array[i] = firstArray[firstArrayIndex] <= secondArray[secondArrayIndex] ? firstArray[firstArrayIndex++] : secondArray[secondArrayIndex++];
+                    array[i] = firstArray[firstArrayIndex].CompareTo(secondArray[secondArrayIndex]) <= 0 ? firstArray[firstArrayIndex++] : secondArray[secondArrayIndex++];
                 }
             }
         }

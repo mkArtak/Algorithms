@@ -11,25 +11,25 @@ namespace AM.Core.Algorithms.Tests
         [ExpectedException(typeof(ArgumentNullException))]
         public void MergeSort_ThrowsForNullArgument()
         {
-            MergeSort.Sort(null);
+            new MergeSort<int>().Sort(null);
         }
 
         [TestMethod]
         public void MergeSort_LeavesASortedArraySorted()
         {
-            GenericSortingAlgorithmTests.ValidateSort_LeavesASortedArraySourted(MergeSort.Sort);
+            GenericSortingAlgorithmTests.ValidateSort_LeavesASortedArraySourted(new MergeSort<int>().Sort);
         }
 
         [TestMethod]
         public void MergeSort_SortsAnUnsortedArray()
         {
-            GenericSortingAlgorithmTests.Validate_SortsAnUnsortedArray(MergeSort.Sort);
+            GenericSortingAlgorithmTests.Validate_SortsAnUnsortedArray(new MergeSort<int>().Sort);
         }
 
         [TestMethod]
         public void MergeSort_SucceedsForEmptyArray()
         {
-            GenericSortingAlgorithmTests.Validate_SortEmptyArraySucceeds(MergeSort.Sort);
+            GenericSortingAlgorithmTests.Validate_SortEmptyArraySucceeds(new MergeSort<int>().Sort);
         }
     }
 }
