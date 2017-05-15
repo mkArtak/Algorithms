@@ -5,8 +5,8 @@ namespace AM.Core.DataStructures
     public class Heap<T> where T : IComparable<T>
     {
         private readonly T[] items;
+        private int size;
         private readonly HeapTypes heapType;
-
 
         /// <summary>
         /// Gets the value of the root element of the heap.
@@ -34,22 +34,34 @@ namespace AM.Core.DataStructures
 
             this.heapType = type;
             this.items = items;
+            this.size = this.items.Length;
             this.Heapify();
+        }
+
+        public T ExtractRoot()
+        {
+            T result = this.Root;
+
+            Swap(0, this.size - 1);
+            this.size--;
+            this.Heapify();
+
+            return result;
         }
 
         private void Heapify()
         {
-            Func<T[], int, int?> heapifyLogic = GetHeapifyLogic();
-            int lastParentIndex = GetParentIndex(this.items.Length - 1);
+            Func<int, int?> heapifyLogic = GetHeapifyLogic();
+            int lastParentIndex = GetParentIndex(this.size - 1);
             for (int i = lastParentIndex; i >= 0; i--)
             {
-                Heapify(this.items, i, heapifyLogic);
+                Heapify(i, heapifyLogic);
             }
         }
 
-        private Func<T[], int, int?> GetHeapifyLogic()
+        private Func<int, int?> GetHeapifyLogic()
         {
-            Func<T[], int, int?> heapifyLogic;
+            Func<int, int?> heapifyLogic;
             switch (this.heapType)
             {
                 case HeapTypes.MaxHeap:
@@ -67,44 +79,44 @@ namespace AM.Core.DataStructures
             return heapifyLogic;
         }
 
-        private static void Heapify(T[] items, int parentIndex, Func<T[], int, int?> swapLogic)
+        private void Heapify(int parentIndex, Func<int, int?> swapLogic)
         {
             do
             {
                 // A null value indicates that there is no swap required on current level.
-                int? childIndexToSwapRootWith = swapLogic(items, parentIndex);
+                int? childIndexToSwapRootWith = swapLogic(parentIndex);
 
                 if (!childIndexToSwapRootWith.HasValue)
                 {
                     break;
                 }
 
-                Swap(items, parentIndex, childIndexToSwapRootWith.Value);
+                Swap(parentIndex, childIndexToSwapRootWith.Value);
                 parentIndex = childIndexToSwapRootWith.Value;
             } while (true);
         }
 
-        private static int? IdentifyChildIndexMaxHeapify(T[] items, int parentIndex)
+        private int? IdentifyChildIndexMaxHeapify(int parentIndex)
         {
             int? childIndexToSwapRootWith = null;
 
             int leftIndex = GetLeftChildIndex(parentIndex);
             int rightIndex = GetRightChildIndex(parentIndex);
 
-            if (rightIndex < items.Length && items[leftIndex].CompareTo(items[rightIndex]) < 0)
+            if (rightIndex < this.size && this.items[leftIndex].CompareTo(this.items[rightIndex]) < 0)
             {
                 // Right child has bigger value than the left child
                 // If it's bigger than the parent's value, then swap those
-                if (items[rightIndex].CompareTo(items[parentIndex]) > 0)
+                if (this.items[rightIndex].CompareTo(this.items[parentIndex]) > 0)
                 {
                     childIndexToSwapRootWith = rightIndex;
                 }
             }
-            else if (leftIndex < items.Length)
+            else if (leftIndex < this.size)
             {
                 // left child has bigger value than the right child
                 // If it's bigger than the parent's value, then swap those
-                if (items[leftIndex].CompareTo(items[parentIndex]) > 0)
+                if (this.items[leftIndex].CompareTo(this.items[parentIndex]) > 0)
                 {
                     childIndexToSwapRootWith = leftIndex;
                 }
@@ -113,27 +125,27 @@ namespace AM.Core.DataStructures
             return childIndexToSwapRootWith;
         }
 
-        private static int? IdentifyChildIndexMinHeapify(T[] items, int parentIndex)
+        private int? IdentifyChildIndexMinHeapify(int parentIndex)
         {
             int? childIndexToSwapRootWith = null;
 
             int leftIndex = GetLeftChildIndex(parentIndex);
             int rightIndex = GetRightChildIndex(parentIndex);
 
-            if (rightIndex < items.Length && items[leftIndex].CompareTo(items[rightIndex]) < 0)
+            if (rightIndex < this.size && this.items[leftIndex].CompareTo(this.items[rightIndex]) > 0)
             {
                 // Right child has bigger value than the left child
                 // If it's bigger than the parent's value, then swap those
-                if (items[rightIndex].CompareTo(items[parentIndex]) < 0)
+                if (this.items[rightIndex].CompareTo(this.items[parentIndex]) < 0)
                 {
                     childIndexToSwapRootWith = rightIndex;
                 }
             }
-            else if (leftIndex < items.Length)
+            else if (leftIndex < this.size)
             {
                 // left child has bigger value than the right child
                 // If it's bigger than the parent's value, then swap those
-                if (items[leftIndex].CompareTo(items[parentIndex]) > 0)
+                if (this.items[leftIndex].CompareTo(this.items[parentIndex]) < 0)
                 {
                     childIndexToSwapRootWith = leftIndex;
                 }
@@ -142,11 +154,11 @@ namespace AM.Core.DataStructures
             return childIndexToSwapRootWith;
         }
 
-        private static void Swap(T[] array, int index1, int index2)
+        private void Swap(int index1, int index2)
         {
-            T temp = array[index1];
-            array[index1] = array[index2];
-            array[index2] = temp;
+            T temp = this.items[index1];
+            this.items[index1] = this.items[index2];
+            this.items[index2] = temp;
         }
 
         private static int GetLeftChildIndex(int parentIndex)
