@@ -45,7 +45,7 @@ namespace AM.Core.Algorithms.Search
         /// <param name="array">The array in which the pivot is being searched for.</param>
         /// <param name="startIndex">The start index of the sub-array, to start search from.</param>
         /// <param name="endIndex">The end index of the sub-array, to end the search at.</param>
-        /// <returns></returns>
+        /// <returns>The index of the pivot point, which is in its final position.</returns>
         private static int FindFixedIndex(T[] array, int startIndex, int endIndex)
         {
             T pivot = array[startIndex];
