@@ -179,5 +179,25 @@ namespace AM.Core.DataStructures
 
             return currentNode;
         }
+
+        public void Traverse(Action<BinarySearchTreeNode<T>> visitor)
+        {
+            if (visitor == null)
+            {
+                throw new ArgumentNullException(nameof(visitor));
+            }
+
+            if (this.LeftChild != null)
+            {
+                this.LeftChild.Traverse(visitor);
+            }
+
+            visitor(this);
+
+            if (this.RightChild != null)
+            {
+                this.RightChild.Traverse(visitor);
+            }
+        }
     }
 }

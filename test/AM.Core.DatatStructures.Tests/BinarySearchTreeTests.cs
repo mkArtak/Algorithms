@@ -1,4 +1,7 @@
-﻿using Xunit;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Xunit;
 
 namespace AM.Core.DataStructures.Tests
 {
@@ -46,13 +49,9 @@ namespace AM.Core.DataStructures.Tests
         [Fact]
         public void Search_FindsDesiredNode()
         {
-            BinarySearchTreeNode<int> root = new BinarySearchTreeNode<int>(10);
-            root.Insert(1);
-            root.Insert(5);
-            root.Insert(16);
+            BinarySearchTreeNode<int> root = CreateTestTree(10, 1, 5, 16);
             BinarySearchTreeNode<int> searchNode = root.Insert(4);
-            root.Insert(3);
-            root.Insert(34);
+            InsertValuesToTree(root, 3, 34);
 
             Assert.Equal(searchNode, root.Search(4));
         }
@@ -60,13 +59,57 @@ namespace AM.Core.DataStructures.Tests
         [Fact]
         public void Root_ReturnsTheRealRoot()
         {
-            BinarySearchTreeNode<int> root = new BinarySearchTreeNode<int>(10);
-            root.Insert(1);
-            root.Insert(5);
-            root.Insert(16);
+            BinarySearchTreeNode<int> root = CreateTestTree(10, 1, 5, 16);
             BinarySearchTreeNode<int> insertedNode = root.Insert(4);
 
             Assert.Equal(root, insertedNode.Root);
+        }
+
+        [Fact]
+        public void Traverse_TraversesAllNodesInLeftSelfRightOrder()
+        {
+            int[] items = new[] { 4, 60, 4, 87, 54, 12, 45, 78, 4, 45, 65 };
+            BinarySearchTreeNode<int> root = CreateTestTree(50, items);
+
+            IList<int> visitedItems = new List<int>();
+            Action<BinarySearchTreeNode<int>> visitor = node =>
+            {
+                visitedItems.Add(node.Value); Console.WriteLine(node.Value);
+            };
+
+            root.Traverse(visitor);
+
+            int[] sortedItems = items.Concat(new[] { root.Value }).OrderBy(item => item).ToArray();
+            Assert.Equal(sortedItems.Length, visitedItems.Count);
+            for (int i = 0; i < visitedItems.Count; i++)
+            {
+                Assert.Equal(sortedItems[i], visitedItems[i]);
+            }
+        }
+
+        /// <summary>
+        /// Creates a new binary search tree, given it's root and items to be added to it.
+        /// </summary>
+        /// <param name="rootValue">The value of the root node.</param>
+        /// <param name="items">A list of values to be added to the tree.</param>
+        /// <returns>A new binary search tree, build from the requested values.</returns>
+        private static BinarySearchTreeNode<int> CreateTestTree(int rootValue, params int[] items)
+        {
+            BinarySearchTreeNode<int> root = new BinarySearchTreeNode<int>(rootValue);
+            if (items != null)
+            {
+                InsertValuesToTree(root, items);
+            }
+
+            return root;
+        }
+
+        private static void InsertValuesToTree(BinarySearchTreeNode<int> root, params int[] items)
+        {
+            foreach (int item in items)
+            {
+                root.Insert(item);
+            }
         }
     }
 }
