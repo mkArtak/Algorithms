@@ -74,7 +74,7 @@ namespace AM.Core.DataStructures.Tests
             IList<int> visitedItems = new List<int>();
             Action<BinarySearchTreeNode<int>> visitor = node =>
             {
-                visitedItems.Add(node.Value); Console.WriteLine(node.Value);
+                visitedItems.Add(node.Value);
             };
 
             root.Traverse(visitor);
