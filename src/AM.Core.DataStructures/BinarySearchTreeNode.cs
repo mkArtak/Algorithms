@@ -152,14 +152,13 @@ namespace AM.Core.DataStructures
         }
 
         /// <summary>
-        /// Searches the tree (starting from the root) for a node with the given value.
+        /// Searches the subtree (rooted at current node) for a node with the given value.
         /// </summary>
         /// <param name="value">The value to search for.</param>
         /// <returns>The node with the specified value, if found. null - otherwise.</returns>
-        /// <remarks>The search on any node of a tree runs a search from the root of it.</remarks>
         public BinarySearchTreeNode<T> Search(T value)
         {
-            BinarySearchTreeNode<T> currentNode = this.Root;
+            BinarySearchTreeNode<T> currentNode = this;
             do
             {
                 if (value.CompareTo(this.Value) <= 0)
