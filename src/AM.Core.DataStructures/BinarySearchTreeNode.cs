@@ -196,17 +196,11 @@ namespace AM.Core.DataStructures
 
         private void TraverseInternal(Action<BinarySearchTreeNode<T>> visitor)
         {
-            if (this.LeftChild != null)
-            {
-                this.LeftChild.TraverseInternal(visitor);
-            }
+            this.LeftChild?.TraverseInternal(visitor);
 
             visitor(this);
 
-            if (this.RightChild != null)
-            {
-                this.RightChild.TraverseInternal(visitor);
-            }
+            this.RightChild?.TraverseInternal(visitor);
         }
     }
 }
