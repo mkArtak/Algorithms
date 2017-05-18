@@ -78,13 +78,12 @@ namespace AM.Core.DataStructures
         /// Inserts the specified node to the current subtree
         /// </summary>
         /// <param name="node">The node to insert to the subtree.</param>
-        /// <remark>Call to this method on any node of a tree will cause the insertion to run from the root of the tree.</remarks>
         public BinarySearchTreeNode<T> Insert(T nodeValue)
         {
             BinarySearchTreeNode<T> node = new BinarySearchTreeNode<T>(nodeValue);
 
             // We shold always insert nodes from the root, to not break the BST properties.
-            BinarySearchTreeNode<T> currentParentNode = this.Root;
+            BinarySearchTreeNode<T> currentParentNode = this;
             do
             {
                 if (node.Value.CompareTo(currentParentNode.Value) <= 0)
