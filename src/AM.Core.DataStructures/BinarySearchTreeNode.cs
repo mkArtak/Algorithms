@@ -180,6 +180,10 @@ namespace AM.Core.DataStructures
             return currentNode;
         }
 
+        /// <summary>
+        /// Runs an in=order traversal over the elements of the tree.
+        /// </summary>
+        /// <param name="visitor">An action to call on every visited node.</param>
         public void Traverse(Action<BinarySearchTreeNode<T>> visitor)
         {
             if (visitor == null)
