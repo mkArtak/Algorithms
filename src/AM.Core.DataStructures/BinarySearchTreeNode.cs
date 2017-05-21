@@ -78,6 +78,7 @@ namespace AM.Core.DataStructures
         /// Inserts the specified node to the current subtree
         /// </summary>
         /// <param name="node">The node to insert to the subtree.</param>
+        /// <returns>The node holding the just-inserted value.</returns>
         public BinarySearchTreeNode<T> Insert(T nodeValue)
         {
             BinarySearchTreeNode<T> node = new BinarySearchTreeNode<T>(nodeValue);
@@ -148,6 +149,93 @@ namespace AM.Core.DataStructures
             {
                 this.RightChild.Parent = this.Parent;
             }
+        }
+
+        public BinarySearchTreeNode<T> FindMinimumNode()
+        {
+            BinarySearchTreeNode<T> result = this;
+            while (result.LeftChild != null)
+            {
+                result = result.LeftChild;
+            }
+
+            return result;
+        }
+
+        public BinarySearchTreeNode<T> FindMaximumNode()
+        {
+            BinarySearchTreeNode<T> result = this;
+            while (result.RightChild != null)
+            {
+                result = result.RightChild;
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Finds the successor of current node.
+        /// </summary>
+        /// <returns>The node, which is the successort to current.</returns>
+        public BinarySearchTreeNode<T> FindSuccessor()
+        {
+            BinarySearchTreeNode<T> result;
+            if (this.RightChild != null)
+            {
+                // If current node has right subtree, then the minimum element of that subtree would be the successor of current element.
+                result = this.RightChild.FindMinimumNode();
+            }
+            else
+            {
+                result = null;
+
+                // We should navigate up through the hierarchy as long as current node is in the right subtree.
+                // As soon as we find a parent node, which for this node is in its left subtree, that'll be the successor of current node.
+                BinarySearchTreeNode<T> currentNode = this;
+                while (currentNode.Parent != null)
+                {
+                    if (currentNode.Parent.LeftChild == currentNode)
+                    {
+                        // Found a parent, which for the currentNode is the left child.
+                        result = currentNode.Parent;
+                        break;
+                    }
+
+                    currentNode = currentNode.Parent;
+                };
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Finds the predecessor of current node.
+        /// </summary>
+        /// <returns>The node, which is the predecessor to current.</returns>
+        public BinarySearchTreeNode<T> FindPredecessor()
+        {
+            BinarySearchTreeNode<T> result;
+            if (this.LeftChild != null)
+            {
+                result = this.LeftChild.FindMaximumNode();
+            }
+            else
+            {
+                result = null;
+                BinarySearchTreeNode<T> currentNode = this;
+                while (currentNode.Parent != null)
+                {
+                    if (currentNode.Parent.RightChild == currentNode)
+                    {
+                        result = currentNode.Parent;
+                        break;
+                    }
+
+                    currentNode = currentNode.Parent;
+                }
+            }
+
+            return result;
         }
 
         /// <summary>

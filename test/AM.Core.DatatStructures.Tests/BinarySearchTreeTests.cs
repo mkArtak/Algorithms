@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using Xunit;
 
 namespace AM.Core.DataStructures.Tests
@@ -87,6 +88,28 @@ namespace AM.Core.DataStructures.Tests
             }
         }
 
+        [Fact]
+        public void FindPredecessor_SucceedsForNodeInLeftSubtree()
+        {
+            BinarySearchTreeNode<int> testTree = CreateTestTree(10, 15, 13, 18);
+            BinarySearchTreeNode<int> expectedSuccessor = testTree.Insert(5);
+            expectedSuccessor.Insert(8);
+            BinarySearchTreeNode<int> nodeToFindSuccessorFor = testTree.Insert(3);
+
+            Assert.Equal(expectedSuccessor, nodeToFindSuccessorFor.FindSuccessor());
+        }
+
+        [Fact]
+        public void FindPredecessor_SucceedsForNodeInRightSubtree()
+        {
+            BinarySearchTreeNode<int> testTree = CreateTestTree(10, 5, 3, 8);
+            BinarySearchTreeNode<int> nodeToFindSuccessorFor = testTree.Insert(15);
+            testTree.Insert(13);
+            BinarySearchTreeNode<int> expectedSuccessor = testTree.Insert(18);
+
+            Assert.Equal(expectedSuccessor, nodeToFindSuccessorFor.FindSuccessor());
+        }
+
         /// <summary>
         /// Creates a new binary search tree, given it's root and items to be added to it.
         /// </summary>
@@ -110,6 +133,18 @@ namespace AM.Core.DataStructures.Tests
             {
                 root.Insert(item);
             }
+        }
+
+        private static string GetDebugTreeStructure(BinarySearchTreeNode<int> tree)
+        {
+            StringBuilder result = new StringBuilder();
+
+            tree.Traverse(node =>
+            {
+                result.Append(node.Value + " ");
+            });
+
+            return result.ToString();
         }
     }
 }
