@@ -89,7 +89,16 @@ namespace AM.Core.DataStructures.Tests
         }
 
         [Fact]
-        public void FindPredecessor_SucceedsForNodeInLeftSubtree()
+        public void FindSuccessor_ReturnsNullForMaximumNode()
+        {
+            BinarySearchTreeNode<int> testTree = CreateTestTree(10, 15, 13, 5, 8, 3);
+            BinarySearchTreeNode<int> nodeToFindSuccessorFor = testTree.Insert(18);
+
+            Assert.Null(nodeToFindSuccessorFor.FindSuccessor());
+        }
+
+        [Fact]
+        public void FindSuccessor_SucceedsForNodeInLeftSubtree()
         {
             BinarySearchTreeNode<int> testTree = CreateTestTree(10, 15, 13, 18);
             BinarySearchTreeNode<int> expectedSuccessor = testTree.Insert(5);
@@ -100,7 +109,7 @@ namespace AM.Core.DataStructures.Tests
         }
 
         [Fact]
-        public void FindPredecessor_SucceedsForNodeInRightSubtree()
+        public void FindSuccessor_SucceedsForNodeInRightSubtree()
         {
             BinarySearchTreeNode<int> testTree = CreateTestTree(10, 5, 3, 8);
             BinarySearchTreeNode<int> nodeToFindSuccessorFor = testTree.Insert(15);
@@ -108,6 +117,37 @@ namespace AM.Core.DataStructures.Tests
             BinarySearchTreeNode<int> expectedSuccessor = testTree.Insert(18);
 
             Assert.Equal(expectedSuccessor, nodeToFindSuccessorFor.FindSuccessor());
+        }
+
+        [Fact]
+        public void FindPredecessor_ReturnsNullForMinimumNode()
+        {
+            BinarySearchTreeNode<int> testTree = CreateTestTree(10, 15, 13, 18, 5, 8);
+            BinarySearchTreeNode<int> nodeToFindSuccessorFor = testTree.Insert(3);
+
+            Assert.Null(nodeToFindSuccessorFor.FindPredecessor());
+        }
+
+        [Fact]
+        public void FindPredecessor_SucceedsForNodeInLeftSubtree()
+        {
+            BinarySearchTreeNode<int> testTree = CreateTestTree(10, 15, 13, 18);
+            BinarySearchTreeNode<int> nodeToFindSuccessorFor = testTree.Insert(5);
+            testTree.Insert(8);
+            BinarySearchTreeNode<int> expectedSuccessor = testTree.Insert(3);
+
+            Assert.Equal(expectedSuccessor, nodeToFindSuccessorFor.FindPredecessor());
+        }
+
+        [Fact]
+        public void FindPredecessor_SucceedsForNodeInRightSubtree()
+        {
+            BinarySearchTreeNode<int> testTree = CreateTestTree(10, 5, 3, 8);
+            BinarySearchTreeNode<int> nodeToFindSuccessorFor = testTree.Insert(15);
+            BinarySearchTreeNode<int> expectedSuccessor = testTree.Insert(13);
+            testTree.Insert(18);
+
+            Assert.Equal(expectedSuccessor, nodeToFindSuccessorFor.FindPredecessor());
         }
 
         /// <summary>
