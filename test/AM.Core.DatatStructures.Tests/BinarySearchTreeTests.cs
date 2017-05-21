@@ -89,6 +89,24 @@ namespace AM.Core.DataStructures.Tests
         }
 
         [Fact]
+        public void FindMinimumNode_ReturnsMinimumNode()
+        {
+            BinarySearchTreeNode<int> tree = CreateTestTree(10, 5, 15, 8, 13, 18);
+            BinarySearchTreeNode<int> expectedNode = tree.Insert(3);
+
+            Assert.Equal(expectedNode, tree.FindMinimumNode());
+        }
+
+        [Fact]
+        public void FindMaximumNode_ReturnsMaximumNode()
+        {
+            BinarySearchTreeNode<int> tree = CreateTestTree(10, 5, 15, 3, 8, 13);
+            BinarySearchTreeNode<int> expectedNode = tree.Insert(18);
+
+            Assert.Equal(expectedNode, tree.FindMaximumNode());
+        }
+
+        [Fact]
         public void FindSuccessor_ReturnsNullForMaximumNode()
         {
             BinarySearchTreeNode<int> testTree = CreateTestTree(10, 15, 13, 5, 8, 3);
