@@ -75,6 +75,12 @@ namespace AM.Core.DataStructures
         }
 
         /// <summary>
+        /// Gets a boolean value indicating, whether the current node is a leaf node or not.
+        /// A leaf node is a node, which have no children.
+        /// </summary>
+        public bool IsLeaf { get { return this.LeftChild == null && this.RightChild == null; } }
+
+        /// <summary>
         /// Inserts the specified node to the current subtree
         /// </summary>
         /// <param name="node">The node to insert to the subtree.</param>
@@ -140,15 +146,45 @@ namespace AM.Core.DataStructures
         /// </summary>
         public void Remove()
         {
-            if (this.LeftChild != null)
+            /*
+             * There are three possible cases:
+             * 1. The node has no children (is leaf node)
+             *    For this case - just set the parent's reference to null.
+             * 2. The node has just one child (left or right subtree).
+             *    Just remove the node and replace the paren't reference to point to the only child subtree
+             * 3. The node has both left and right subtrees.
+             *    
+             * */
+            if (this.IsLeaf)
             {
-                this.LeftChild.Parent = this.Parent;
-                this.LeftChild.RightChild = this.RightChild;
+                // The node has no child subtrees.
+                if (this.Parent != null)
+                {
+                    ReplaceParentNodesReferenceToNodeWith(this, null);
+                }
             }
-            else if (this.RightChild != null)
+            else if (this.LeftChild != null && this.RightChild != null)
             {
-                this.RightChild.Parent = this.Parent;
+                // The node has both child subtrees present.
+                BinarySearchTreeNode<T> successor = this.FindSuccessor();
+                // Remove the predecessor from the tree (this should have no children)
+                successor.Remove();
+
+                ReplaceParentNodesReferenceToNodeWith(this, successor);
             }
+            else
+            {
+                // The node has only one child subtree.
+                if (this.Parent != null)
+                {
+                    BinarySearchTreeNode<T> onlyChild = this.LeftChild ?? this.RightChild;
+                    // Update the paren'ts reference to the child subtree.
+                    ReplaceParentNodesReferenceToNodeWith(this, onlyChild);
+                }
+            }
+
+            // Remove the node from tree completely.
+            this.Parent = null;
         }
 
         public BinarySearchTreeNode<T> FindMinimumNode()
@@ -287,6 +323,18 @@ namespace AM.Core.DataStructures
             visitor(this);
 
             this.RightChild?.TraverseInternal(visitor);
+        }
+
+        private static void ReplaceParentNodesReferenceToNodeWith(BinarySearchTreeNode<T> node, BinarySearchTreeNode<T> nodeToReplaceWith)
+        {
+            if (node.Parent.LeftChild == node)
+            {
+                node.Parent.LeftChild = nodeToReplaceWith;
+            }
+            else if (node.Parent.RightChild == node)
+            {
+                node.Parent.RightChild = nodeToReplaceWith;
+            }
         }
     }
 }

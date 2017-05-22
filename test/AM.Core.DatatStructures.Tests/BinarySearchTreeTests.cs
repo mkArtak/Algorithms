@@ -9,7 +9,43 @@ namespace AM.Core.DataStructures.Tests
     public class BinarySearchTreeTests
     {
         [Fact]
-        public void BinarySearchTree_NewHasNoParent()
+        public void IsRoot_ReturnsTrueForRootNode()
+        {
+            BinarySearchTreeNode<int> tree = CreateTestTree(10, 1);
+
+            Assert.True(tree.IsRoot);
+        }
+
+        [Fact]
+        public void IsRoot_ReturnsFalseForNonRootNode()
+        {
+            BinarySearchTreeNode<int> tree = CreateTestTree(10);
+            Assert.False(tree.Insert(1).IsRoot);
+        }
+
+        [Fact]
+        public void IsLeaf_ReturnsTrueForLeafNode()
+        {
+            BinarySearchTreeNode<int> testTree = CreateTestTree(10);
+
+            BinarySearchTreeNode<int> leafNode = testTree.Insert(4);
+
+            Assert.True(leafNode.IsLeaf);
+        }
+
+        [Fact]
+        public void IsLeaf_ReturnsFalseForNonLeafNode()
+        {
+            BinarySearchTreeNode<int> testTree = CreateTestTree(10);
+
+            BinarySearchTreeNode<int> leafNode = testTree.Insert(4);
+            testTree.Insert(3);
+
+            Assert.False(leafNode.IsLeaf);
+        }
+
+        [Fact]
+        public void Ctor_NewNodeHasNoParent()
         {
             BinarySearchTreeNode<int> root = new BinarySearchTreeNode<int>(10);
 
@@ -17,7 +53,7 @@ namespace AM.Core.DataStructures.Tests
         }
 
         [Fact]
-        public void BinarySearchTree_NewHasNoChildren()
+        public void Ctor_NewNodeHasNoChildren()
         {
             BinarySearchTreeNode<int> root = new BinarySearchTreeNode<int>(10);
 
@@ -45,6 +81,41 @@ namespace AM.Core.DataStructures.Tests
 
             BinarySearchTreeNode<int> rightNode = root.Insert(11);
             Assert.Equal(rightNode, root.RightChild);
+        }
+
+        [Fact]
+        public void Remove_SucceedsWhenRemovingLeafNode()
+        {
+            BinarySearchTreeNode<int> testTree = CreateTestTree(10, 5, 15, 8, 13);
+            BinarySearchTreeNode<int> nodeToRemove = testTree.Insert(3);
+            nodeToRemove.Remove();
+
+            AssertTreeHasOnlyElements(testTree, new[] { 10, 5, 15, 8, 13 });
+        }
+
+        [Fact]
+        public void Remove_SucceedsWhenRemovingNodeWithSingleChild()
+        {
+            BinarySearchTreeNode<int> testTree = CreateTestTree(10, 5, 15, 8, 13);
+            BinarySearchTreeNode<int> nodeToRemove = testTree.Insert(3);
+            testTree.Insert(1);
+
+            nodeToRemove.Remove();
+
+            AssertTreeHasOnlyElements(testTree, new[] { 1, 10, 5, 15, 8, 13 });
+        }
+
+        [Fact]
+        public void Remove_SucceedsForNodeWithTwoChildren()
+        {
+            BinarySearchTreeNode<int> testTree = CreateTestTree(10, 5, 15, 8, 13);
+            BinarySearchTreeNode<int> nodeToRemove = testTree.Insert(3);
+            testTree.Insert(1);
+            testTree.Insert(4);
+
+            nodeToRemove.Remove();
+
+            AssertTreeHasOnlyElements(testTree, new[] { 1, 4, 10, 5, 15, 8, 13 });
         }
 
         [Fact]
@@ -198,11 +269,31 @@ namespace AM.Core.DataStructures.Tests
             StringBuilder result = new StringBuilder();
 
             tree.Traverse(node =>
-            {
-                result.Append(node.Value + " ");
-            });
+                {
+                    result.Append(node.Value + " ");
+                });
 
             return result.ToString();
+        }
+
+        /// <summary>
+        /// Ensures that the specified arrays have the same elements in the same order.
+        /// </summary>
+        private static void AssertEqualArrays(int[] sourceArray, int[] actualArray)
+        {
+            Assert.Equal(sourceArray.Length, actualArray.Length);
+
+            for (int i = 0; i < sourceArray.Length; i++)
+            {
+                Assert.Equal(sourceArray[i], actualArray[i]);
+            }
+        }
+
+        private static void AssertTreeHasOnlyElements(BinarySearchTreeNode<int> root, int[] elements)
+        {
+            IList<int> nodes = new List<int>();
+            root.Traverse(node => nodes.Add(node.Value));
+            AssertEqualArrays(elements.OrderBy(item => item).ToArray(), nodes.ToArray());
         }
     }
 }
