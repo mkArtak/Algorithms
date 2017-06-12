@@ -1,2 +1,3 @@
 # Algorithms
-An implementation of well-known algorithms in C#
+Implementation of well-known algorithms in C#.
+Some of those algorithms appear during software engineering interviews.
