@@ -12,3 +12,7 @@
 /test/AM.Core.Algorithms.Tests/obj/
 /test/AM.Core.DatatStructures.Tests/bin/
 /test/AM.Core.DatatStructures.Tests/obj/
+/src/AM.Core.Algorithms.StringManipulation/bin
+/src/AM.Core.Algorithms.StringManipulation/obj
+/test/AM.Core.Algorithms.StringManipulation.Tests/bin
+/test/AM.Core.Algorithms.StringManipulation.Tests/obj
