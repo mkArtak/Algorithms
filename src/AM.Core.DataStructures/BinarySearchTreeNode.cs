@@ -6,18 +6,18 @@ namespace AM.Core.DataStructures
     /// Represents a node in a binary search tree.
     /// </summary>
     /// <typeparam name="T">The type of the value each node of the tree will hold.</typeparam>
-    public class BinarySearchTreeNode<T> where T : IComparable<T>
+    public abstract class BinarySearchTreeNode<T, V> where T : IComparable<T> where V : BinarySearchTreeNode<T, V>, new()
     {
-        private BinarySearchTreeNode<T> leftChild;
-        private BinarySearchTreeNode<T> rightChild;
+        private V leftChild;
+        private V rightChild;
 
-        public BinarySearchTreeNode<T> Parent { get; private set; }
+        public V Parent { get; private set; }
 
-        public BinarySearchTreeNode<T> Root
+        public V Root
         {
             get
             {
-                BinarySearchTreeNode<T> parent = this;
+                V parent = (V)this;
                 while (parent.Parent != null)
                 {
                     parent = parent.Parent;
@@ -27,36 +27,40 @@ namespace AM.Core.DataStructures
             }
         }
 
-        public BinarySearchTreeNode<T> LeftChild
+        public V LeftChild
         {
             get { return this.leftChild; }
-            private set
+            protected set
             {
                 this.leftChild = value;
                 if (value != null)
                 {
-                    value.Parent = this;
+                    value.Parent = (V)this;
                 }
             }
         }
 
-        public BinarySearchTreeNode<T> RightChild
+        public V RightChild
         {
             get
             {
                 return this.rightChild;
             }
-            private set
+            protected set
             {
                 this.rightChild = value;
                 if (value != null)
                 {
-                    value.Parent = this;
+                    value.Parent = (V)this;
                 }
             }
         }
 
         public T Value { get; private set; }
+
+        public BinarySearchTreeNode()
+        {
+        }
 
         public BinarySearchTreeNode(T value)
         {
@@ -85,12 +89,13 @@ namespace AM.Core.DataStructures
         /// </summary>
         /// <param name="node">The node to insert to the subtree.</param>
         /// <returns>The node holding the just-inserted value.</returns>
-        public BinarySearchTreeNode<T> Insert(T nodeValue)
+        public V Insert(T nodeValue)
         {
-            BinarySearchTreeNode<T> node = new BinarySearchTreeNode<T>(nodeValue);
+            V node = new V();
+            node.Value = nodeValue;
 
-            // We shold always insert nodes from the root, to not break the BST properties.
-            BinarySearchTreeNode<T> currentParentNode = this;
+            // We should always insert nodes from the root, to not break the BST properties.
+            V currentParentNode = (V)this;
             do
             {
                 if (node.Value.CompareTo(currentParentNode.Value) <= 0)
@@ -160,26 +165,26 @@ namespace AM.Core.DataStructures
                 // The node has no child subtrees.
                 if (this.Parent != null)
                 {
-                    ReplaceParentNodesReferenceToNodeWith(this, null);
+                    ReplaceParentNodesReferenceToNodeWith((V)this, null);
                 }
             }
             else if (this.LeftChild != null && this.RightChild != null)
             {
                 // The node has both child subtrees present.
-                BinarySearchTreeNode<T> successor = this.FindSuccessor();
+                V successor = this.FindSuccessor();
                 // Remove the predecessor from the tree (this should have no children)
                 successor.Remove();
 
-                ReplaceParentNodesReferenceToNodeWith(this, successor);
+                ReplaceParentNodesReferenceToNodeWith((V)this, successor);
             }
             else
             {
                 // The node has only one child subtree.
                 if (this.Parent != null)
                 {
-                    BinarySearchTreeNode<T> onlyChild = this.LeftChild ?? this.RightChild;
+                    V onlyChild = this.LeftChild ?? this.RightChild;
                     // Update the paren'ts reference to the child subtree.
-                    ReplaceParentNodesReferenceToNodeWith(this, onlyChild);
+                    ReplaceParentNodesReferenceToNodeWith((V)this, onlyChild);
                 }
             }
 
@@ -187,9 +192,9 @@ namespace AM.Core.DataStructures
             this.Parent = null;
         }
 
-        public BinarySearchTreeNode<T> FindMinimumNode()
+        public V FindMinimumNode()
         {
-            BinarySearchTreeNode<T> result = this;
+            V result = (V)this;
             while (result.LeftChild != null)
             {
                 result = result.LeftChild;
@@ -198,9 +203,9 @@ namespace AM.Core.DataStructures
             return result;
         }
 
-        public BinarySearchTreeNode<T> FindMaximumNode()
+        public V FindMaximumNode()
         {
-            BinarySearchTreeNode<T> result = this;
+            V result = (V)this;
             while (result.RightChild != null)
             {
                 result = result.RightChild;
@@ -213,9 +218,9 @@ namespace AM.Core.DataStructures
         /// Finds the successor of current node.
         /// </summary>
         /// <returns>The node, which is the successort to current.</returns>
-        public BinarySearchTreeNode<T> FindSuccessor()
+        public V FindSuccessor()
         {
-            BinarySearchTreeNode<T> result;
+            V result;
             if (this.RightChild != null)
             {
                 // If current node has right subtree, then the minimum element of that subtree would be the successor of current element.
@@ -227,7 +232,7 @@ namespace AM.Core.DataStructures
 
                 // We should navigate up through the hierarchy as long as current node is in the right subtree.
                 // As soon as we find a parent node, which for this node is in its left subtree, that'll be the successor of current node.
-                BinarySearchTreeNode<T> currentNode = this;
+                V currentNode = (V)this;
                 while (currentNode.Parent != null)
                 {
                     if (currentNode.Parent.LeftChild == currentNode)
@@ -248,9 +253,9 @@ namespace AM.Core.DataStructures
         /// Finds the predecessor of current node.
         /// </summary>
         /// <returns>The node, which is the predecessor to current.</returns>
-        public BinarySearchTreeNode<T> FindPredecessor()
+        public V FindPredecessor()
         {
-            BinarySearchTreeNode<T> result;
+            V result;
             if (this.LeftChild != null)
             {
                 result = this.LeftChild.FindMaximumNode();
@@ -258,7 +263,7 @@ namespace AM.Core.DataStructures
             else
             {
                 result = null;
-                BinarySearchTreeNode<T> currentNode = this;
+                V currentNode = (V)this;
                 while (currentNode.Parent != null)
                 {
                     if (currentNode.Parent.RightChild == currentNode)
@@ -279,9 +284,9 @@ namespace AM.Core.DataStructures
         /// </summary>
         /// <param name="value">The value to search for.</param>
         /// <returns>The node with the specified value, if found. null - otherwise.</returns>
-        public BinarySearchTreeNode<T> Search(T value)
+        public V Search(T value)
         {
-            BinarySearchTreeNode<T> currentNode = this;
+            V currentNode = (V)this;
             do
             {
                 if (value.CompareTo(this.Value) <= 0)
@@ -306,7 +311,7 @@ namespace AM.Core.DataStructures
         /// Runs an in=order traversal over the elements of the tree.
         /// </summary>
         /// <param name="visitor">An action to call on every visited node.</param>
-        public void Traverse(Action<BinarySearchTreeNode<T>> visitor)
+        public void Traverse(Action<V> visitor)
         {
             if (visitor == null)
             {
@@ -316,16 +321,16 @@ namespace AM.Core.DataStructures
             this.TraverseInternal(visitor);
         }
 
-        private void TraverseInternal(Action<BinarySearchTreeNode<T>> visitor)
+        private void TraverseInternal(Action<V> visitor)
         {
             this.LeftChild?.TraverseInternal(visitor);
 
-            visitor(this);
+            visitor((V)this);
 
             this.RightChild?.TraverseInternal(visitor);
         }
 
-        private static void ReplaceParentNodesReferenceToNodeWith(BinarySearchTreeNode<T> node, BinarySearchTreeNode<T> nodeToReplaceWith)
+        private static void ReplaceParentNodesReferenceToNodeWith(V node, V nodeToReplaceWith)
         {
             if (node.Parent.LeftChild == node)
             {
