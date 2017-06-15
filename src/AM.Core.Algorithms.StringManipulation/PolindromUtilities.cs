@@ -36,12 +36,6 @@ namespace AM.Core.Algorithms.StringManipulation
                 throw new ArgumentNullException(nameof(input));
             }
 
-            //if (input.Length == 1)
-            //{
-            //    // As an empty string is polindrom, removal of the only character would make it polindrom.
-            //    return 0;
-            //}
-
             int stepBackIndex = 0;
 
             if (input.Length > 1)
