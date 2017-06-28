@@ -16,3 +16,7 @@
 /src/AM.Core.Algorithms.StringManipulation/obj
 /test/AM.Core.Algorithms.StringManipulation.Tests/bin
 /test/AM.Core.Algorithms.StringManipulation.Tests/obj
+/src/AM.Core.Algorithms.DynamicProgramming/bin
+/src/AM.Core.Algorithms.DynamicProgramming/obj
+/test/AM.Core.DynamicProgramming.Tests/bin
+/test/AM.Core.DynamicProgramming.Tests/obj

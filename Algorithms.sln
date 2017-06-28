@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.13
+VisualStudioVersion = 15.0.26430.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{DCDCBE17-04F0-407C-A875-6A264F9B237B}"
 EndProject
@@ -23,6 +23,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AM.Core.Algorithms.StringManipulation", "src\AM.Core.Algorithms.StringManipulation\AM.Core.Algorithms.StringManipulation.csproj", "{F9CD11AA-531A-4E57-9D98-8DAE4311D15D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AM.Core.Algorithms.StringManipulation.Tests", "test\AM.Core.Algorithms.StringManipulation.Tests\AM.Core.Algorithms.StringManipulation.Tests.csproj", "{2970FA41-CE94-4946-BBF6-DDB5D056DFFA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AM.Core.Algorithms.DynamicProgramming", "src\AM.Core.Algorithms.DynamicProgramming\AM.Core.Algorithms.DynamicProgramming.csproj", "{4FF08D75-7F32-421B-9A13-A2D03FB6A09D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AM.Core.Algorithms.DynamicProgramming.Tests", "test\AM.Core.DynamicProgramming.Tests\AM.Core.Algorithms.DynamicProgramming.Tests.csproj", "{1B721BE2-B008-418D-A27A-9975F8B28D93}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -54,6 +58,14 @@ Global
 		{2970FA41-CE94-4946-BBF6-DDB5D056DFFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2970FA41-CE94-4946-BBF6-DDB5D056DFFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2970FA41-CE94-4946-BBF6-DDB5D056DFFA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4FF08D75-7F32-421B-9A13-A2D03FB6A09D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4FF08D75-7F32-421B-9A13-A2D03FB6A09D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4FF08D75-7F32-421B-9A13-A2D03FB6A09D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4FF08D75-7F32-421B-9A13-A2D03FB6A09D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B721BE2-B008-418D-A27A-9975F8B28D93}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B721BE2-B008-418D-A27A-9975F8B28D93}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B721BE2-B008-418D-A27A-9975F8B28D93}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B721BE2-B008-418D-A27A-9975F8B28D93}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -65,5 +77,7 @@ Global
 		{88BF1098-F607-49F1-938C-DB3B5E966C7F} = {6CE9EBB5-1C0D-4A00-88E4-45AC673591F3}
 		{F9CD11AA-531A-4E57-9D98-8DAE4311D15D} = {DCDCBE17-04F0-407C-A875-6A264F9B237B}
 		{2970FA41-CE94-4946-BBF6-DDB5D056DFFA} = {6CE9EBB5-1C0D-4A00-88E4-45AC673591F3}
+		{4FF08D75-7F32-421B-9A13-A2D03FB6A09D} = {DCDCBE17-04F0-407C-A875-6A264F9B237B}
+		{1B721BE2-B008-418D-A27A-9975F8B28D93} = {6CE9EBB5-1C0D-4A00-88E4-45AC673591F3}
 	EndGlobalSection
 EndGlobal
