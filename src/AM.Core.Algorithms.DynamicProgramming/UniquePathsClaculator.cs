@@ -8,8 +8,8 @@ namespace AM.Core.Algorithms.DynamicProgramming
         /// Calculates the number of unique paths, which can be taken to move from top-left corner of an mxn matrix to the bottom-right corner.
         /// The algorithm stored the number of paths leading to the cell in it. So for each cell - the number of paths is "number of paths which took to the upper cell" + "the number of paths which took to the left cell"
         /// </summary>
-        /// <param name="m"></param>
-        /// <param name="n"></param>
+        /// <param name="m">The number of rows in the matrix</param>
+        /// <param name="n">The number of columns in the matrix</param>
         /// <returns></returns>
         public static int GetNumberOfUniquePaths(int m, int n)
         {

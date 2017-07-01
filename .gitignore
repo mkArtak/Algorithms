@@ -20,3 +20,7 @@
 /src/AM.Core.Algorithms.DynamicProgramming/obj
 /test/AM.Core.DynamicProgramming.Tests/bin
 /test/AM.Core.DynamicProgramming.Tests/obj
+/src/AM.Core.Algorithms.Combinatorics/bin
+/src/AM.Core.Algorithms.Combinatorics/obj
+/test/AM.Core.Algorithms.Combinatorics.Tests/bin
+/test/AM.Core.Algorithms.Combinatorics.Tests/obj

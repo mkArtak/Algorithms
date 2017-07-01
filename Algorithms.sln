@@ -16,17 +16,21 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AM.Core.DataStructures", "s
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AM.Core.Algorithms.Search", "src\AM.Core.Algorithms.Search\AM.Core.Algorithms.Search.csproj", "{3B470907-3B0A-4676-82EA-67B7AD601CBE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AM.Core.Algorithms.Tests", "test\AM.Core.Algorithms.Tests\AM.Core.Algorithms.Tests.csproj", "{B8EF897D-BD9C-434D-9643-41F76F0AF2EB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AM.Core.Algorithms.Tests", "test\AM.Core.Algorithms.Tests\AM.Core.Algorithms.Tests.csproj", "{B8EF897D-BD9C-434D-9643-41F76F0AF2EB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AM.Core.DataStructures.Tests", "test\AM.Core.DatatStructures.Tests\AM.Core.DataStructures.Tests.csproj", "{88BF1098-F607-49F1-938C-DB3B5E966C7F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AM.Core.DataStructures.Tests", "test\AM.Core.DatatStructures.Tests\AM.Core.DataStructures.Tests.csproj", "{88BF1098-F607-49F1-938C-DB3B5E966C7F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AM.Core.Algorithms.StringManipulation", "src\AM.Core.Algorithms.StringManipulation\AM.Core.Algorithms.StringManipulation.csproj", "{F9CD11AA-531A-4E57-9D98-8DAE4311D15D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AM.Core.Algorithms.StringManipulation", "src\AM.Core.Algorithms.StringManipulation\AM.Core.Algorithms.StringManipulation.csproj", "{F9CD11AA-531A-4E57-9D98-8DAE4311D15D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AM.Core.Algorithms.StringManipulation.Tests", "test\AM.Core.Algorithms.StringManipulation.Tests\AM.Core.Algorithms.StringManipulation.Tests.csproj", "{2970FA41-CE94-4946-BBF6-DDB5D056DFFA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AM.Core.Algorithms.StringManipulation.Tests", "test\AM.Core.Algorithms.StringManipulation.Tests\AM.Core.Algorithms.StringManipulation.Tests.csproj", "{2970FA41-CE94-4946-BBF6-DDB5D056DFFA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AM.Core.Algorithms.DynamicProgramming", "src\AM.Core.Algorithms.DynamicProgramming\AM.Core.Algorithms.DynamicProgramming.csproj", "{4FF08D75-7F32-421B-9A13-A2D03FB6A09D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AM.Core.Algorithms.DynamicProgramming", "src\AM.Core.Algorithms.DynamicProgramming\AM.Core.Algorithms.DynamicProgramming.csproj", "{4FF08D75-7F32-421B-9A13-A2D03FB6A09D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AM.Core.Algorithms.DynamicProgramming.Tests", "test\AM.Core.DynamicProgramming.Tests\AM.Core.Algorithms.DynamicProgramming.Tests.csproj", "{1B721BE2-B008-418D-A27A-9975F8B28D93}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AM.Core.Algorithms.DynamicProgramming.Tests", "test\AM.Core.DynamicProgramming.Tests\AM.Core.Algorithms.DynamicProgramming.Tests.csproj", "{1B721BE2-B008-418D-A27A-9975F8B28D93}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AM.Core.Algorithms.Combinatorics", "src\AM.Core.Algorithms.Combinatorics\AM.Core.Algorithms.Combinatorics.csproj", "{9BB0803A-759A-4BEB-8EEB-658CA13E59FE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AM.Core.Algorithms.Combinatorics.Tests", "test\AM.Core.Algorithms.Combinatorics.Tests\AM.Core.Algorithms.Combinatorics.Tests.csproj", "{A60AB50C-3DDC-4AD0-BD96-22E1C0ACB4D0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -66,6 +70,14 @@ Global
 		{1B721BE2-B008-418D-A27A-9975F8B28D93}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1B721BE2-B008-418D-A27A-9975F8B28D93}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1B721BE2-B008-418D-A27A-9975F8B28D93}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9BB0803A-759A-4BEB-8EEB-658CA13E59FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9BB0803A-759A-4BEB-8EEB-658CA13E59FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9BB0803A-759A-4BEB-8EEB-658CA13E59FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9BB0803A-759A-4BEB-8EEB-658CA13E59FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A60AB50C-3DDC-4AD0-BD96-22E1C0ACB4D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A60AB50C-3DDC-4AD0-BD96-22E1C0ACB4D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A60AB50C-3DDC-4AD0-BD96-22E1C0ACB4D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A60AB50C-3DDC-4AD0-BD96-22E1C0ACB4D0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -79,5 +91,7 @@ Global
 		{2970FA41-CE94-4946-BBF6-DDB5D056DFFA} = {6CE9EBB5-1C0D-4A00-88E4-45AC673591F3}
 		{4FF08D75-7F32-421B-9A13-A2D03FB6A09D} = {DCDCBE17-04F0-407C-A875-6A264F9B237B}
 		{1B721BE2-B008-418D-A27A-9975F8B28D93} = {6CE9EBB5-1C0D-4A00-88E4-45AC673591F3}
+		{9BB0803A-759A-4BEB-8EEB-658CA13E59FE} = {DCDCBE17-04F0-407C-A875-6A264F9B237B}
+		{A60AB50C-3DDC-4AD0-BD96-22E1C0ACB4D0} = {6CE9EBB5-1C0D-4A00-88E4-45AC673591F3}
 	EndGlobalSection
 EndGlobal
