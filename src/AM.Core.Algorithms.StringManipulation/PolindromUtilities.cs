@@ -86,5 +86,74 @@ namespace AM.Core.Algorithms.StringManipulation
 
             return stepBackIndex;
         }
+
+        /// <summary>
+        /// Finds the longest polindromic substring of the given input.
+        /// </summary>
+        /// <param name="input">The input string to find polindromes in.</param>
+        /// <returns>The longest polindromic substring.</returns>
+        public static string GetLongestPolindrome(string input)
+        {
+            if (input == null)
+            {
+                throw new ArgumentNullException();
+            }
+
+            if (input.Length == 0)
+            {
+                return string.Empty;
+            }
+
+            if (input.Length == 1)
+            {
+                return input;
+            }
+
+            if (input.Length == 2)
+            {
+                if (input[0] == input[1])
+                {
+                    return input;
+                }
+                else
+                {
+                    return input[0].ToString();
+                }
+            }
+
+            bool[,] map = new bool[input.Length, input.Length];
+            for (int i = 0; i < input.Length; i++)
+            {
+                // All the single-characters are polindromes
+                map[i, i] = true;
+            }
+
+            for (int i = 0; i < input.Length - 1; i++)
+            {
+                // All the double-character strings are polindrome, only if both characters are the same
+                map[i, i + 1] = input[i] == input[i + 1];
+            }
+
+            string maxPolindrome = string.Empty;
+
+            for (int lengthToConsider = 3; lengthToConsider <= input.Length; lengthToConsider++)
+            {
+                for (int i = 0; i <= input.Length - lengthToConsider; i++)
+                {
+                    // The substring starting at character i of length `lengthToConsider` is polindrome, if the first and last characters are the same and the substring without those characters is polindrome.
+                    if (input[i] == input[i + lengthToConsider - 1])
+                    {
+                        bool isSubstringPolindrome = map[i + 1, i + lengthToConsider - 2];
+                        map[i, i + lengthToConsider - 1] = isSubstringPolindrome;
+                        if (isSubstringPolindrome)
+                        {
+                            maxPolindrome = input.Substring(i, lengthToConsider);
+                        }
+                    }
+                }
+            }
+
+            return maxPolindrome;
+        }
     }
 }
