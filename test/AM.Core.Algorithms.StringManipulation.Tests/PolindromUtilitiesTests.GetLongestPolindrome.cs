@@ -40,13 +40,12 @@ namespace AM.Core.Algorithms.StringManipulation.Tests
             Assert.Equal(polindrome, PolindromUtilities.GetLongestPolindrome(input));
         }
 
-        [Fact]
-        public void GetLongestPolindrome_Succeeds_ForTwoPolindrome()
+        [Theory]
+        [InlineData("_abba+cdbbdc-", "cdbbdc")]
+        [InlineData("cbbd", "bb")]
+        public void GetLongestPolindrome_Succeeds_ForTwoPolindrome(string input, string expectedOutput)
         {
-            const string polindrome1 = "abccba";
-            const string polindrome2 = "abcdnbndcba";
-            const string input = "zza" + polindrome1 + "bbv" + polindrome2;
-            Assert.Equal(polindrome2, PolindromUtilities.GetLongestPolindrome(input));
+            Assert.Equal(expectedOutput, PolindromUtilities.GetLongestPolindrome(input));
         }
     }
 }
