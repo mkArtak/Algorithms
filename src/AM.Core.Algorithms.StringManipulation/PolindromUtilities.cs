@@ -90,52 +90,53 @@ namespace AM.Core.Algorithms.StringManipulation
         /// <summary>
         /// Finds the longest polindromic substring of the given input.
         /// </summary>
-        /// <param name="s">The input string to find polindromes in.</param>
+        /// <param name="input">The input string to find polindromes in.</param>
         /// <returns>The longest polindromic substring.</returns>
-        public static string GetLongestPolindrome(string s)
+        /// <remarks>This method is based on dynamic programming solution and has a time complexity of O(n^2) and space complexity of O(n^2), where n is the length of the provided input string.</remarks>
+        public static string GetLongestPolindrome(string input)
         {
-            if (s == null)
+            if (input == null)
             {
                 throw new ArgumentNullException();
             }
 
-            if (s.Length == 0)
+            if (input.Length == 0)
             {
                 return string.Empty;
             }
 
-            if (s.Length == 1)
+            if (input.Length == 1)
             {
-                return s;
+                return input;
             }
 
-            if (s.Length == 2)
+            if (input.Length == 2)
             {
-                if (s[0] == s[1])
+                if (input[0] == input[1])
                 {
-                    return s;
+                    return input;
                 }
                 else
                 {
-                    return s[0].ToString();
+                    return input[0].ToString();
                 }
             }
 
-            bool[,] map = new bool[s.Length, s.Length];
+            bool[,] map = new bool[input.Length, input.Length];
 
             int maxPolindromeStart = 0;
             int maxPolindromeLength = 1;
 
-            for (int i = 0; i < s.Length; i++)
+            for (int i = 0; i < input.Length; i++)
             {
                 // All the single-characters are polindromes
                 map[i, i] = true;
             }
 
-            for (int i = 0; i < s.Length - 1; i++)
+            for (int i = 0; i < input.Length - 1; i++)
             {
                 // All the double-character strings are polindrome, only if both characters are the same
-                if (map[i, i + 1] = s[i] == s[i + 1])
+                if (map[i, i + 1] = input[i] == input[i + 1])
                 {
                     if (maxPolindromeLength < 2)
                     {
@@ -145,13 +146,13 @@ namespace AM.Core.Algorithms.StringManipulation
                 }
             }
 
-            for (int lengthToConsider = 3; lengthToConsider <= s.Length; lengthToConsider++)
+            for (int lengthToConsider = 3; lengthToConsider <= input.Length; lengthToConsider++)
             {
-                for (int i = 0; i <= s.Length - lengthToConsider; i++)
+                for (int i = 0; i <= input.Length - lengthToConsider; i++)
                 {
                     // The substring starting at character i of length `lengthToConsider` is polindrome, if the first and last characters are the same and the substring without those characters is polindrome.
                     int j = i + lengthToConsider - 1;
-                    if (s[i] == s[j] && map[i + 1, j - 1])
+                    if (input[i] == input[j] && map[i + 1, j - 1])
                     {
                         map[i, j] = true;
                         if (maxPolindromeLength < lengthToConsider)
@@ -163,7 +164,59 @@ namespace AM.Core.Algorithms.StringManipulation
                 }
             }
 
-            return s.Substring(maxPolindromeStart, maxPolindromeLength);
+            return input.Substring(maxPolindromeStart, maxPolindromeLength);
+        }
+
+        /// <summary>
+        /// Finds the longest polindromic substring of the given input.
+        /// </summary>
+        /// <param name="input">The input string to find polindromes in.</param>
+        /// <returns>The longest polindromic substring.</returns>
+        /// <remarks>This method is based on the fact that polindromes are symmetic to their center. The time complexity for this algorithm is O(n^2) and space complexity of O(1), where n is the length of the provided input string.</remarks>
+        public static string GetLongestPolindrome2(string input)
+        {
+            if (input == null || input.Length <= 1)
+                return input;
+
+            if (input.Length == 2)
+            {
+                return input[0] == input[1] ? input : input[0].ToString();
+            }
+            int savedMaxLength = 1;
+            int maxStartIndex = 0;
+
+            for (int i = 0; i < input.Length; i++)
+            {
+                // Let's consider two possible polindromes here.
+                // The first one has input[i] as it's center (odd length)
+                // The second one has center between input[i] and input[i+1] (even length)
+
+                int oddLength = GetPolindromeLengthAtPosition(input, i, i);
+                int evenLength = GetPolindromeLengthAtPosition(input, i, i + 1);
+
+                int maxLength = Math.Max(oddLength, evenLength);
+                int startIndex = i - (maxLength - 1) / 2;
+                int endIndex = i + maxLength / 2;
+
+                if (maxLength > savedMaxLength)
+                {
+                    maxStartIndex = startIndex;
+                    savedMaxLength = maxLength;
+                }
+            }
+
+            return input.Substring(maxStartIndex, savedMaxLength);
+        }
+
+        private static int GetPolindromeLengthAtPosition(string input, int leftIndex, int rightIndex)
+        {
+            while (leftIndex >= 0 && rightIndex < input.Length && input[leftIndex] == input[rightIndex])
+            {
+                leftIndex--;
+                rightIndex++;
+            }
+
+            return rightIndex - leftIndex - 1;
         }
     }
 }

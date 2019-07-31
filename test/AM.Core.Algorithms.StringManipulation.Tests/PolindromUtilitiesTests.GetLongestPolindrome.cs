@@ -2,50 +2,50 @@
 
 namespace AM.Core.Algorithms.StringManipulation.Tests
 {
-    public partial class PolindromUtilities_GetLongestPolindrome_Tests
+    public partial class PolindromUtilities_GetLongestPolindrome2_Tests
     {
         [Fact]
-        public void GetLongestPolindrome_ReturnsInputForSingleCharacter()
+        public void GetLongestPolindrome2_ReturnsInputForSingleCharacter()
         {
             const string input = "a";
-            Assert.Equal(input, PolindromUtilities.GetLongestPolindrome(input));
+            Assert.Equal(input, PolindromUtilities.GetLongestPolindrome2(input));
         }
 
         [Fact]
-        public void GetLongestPolindrome_ReturnsEmptyForEmptyInput()
+        public void GetLongestPolindrome2_ReturnsEmptyForEmptyInput()
         {
-            Assert.Equal(string.Empty, PolindromUtilities.GetLongestPolindrome(string.Empty));
+            Assert.Equal(string.Empty, PolindromUtilities.GetLongestPolindrome2(string.Empty));
         }
 
         [Fact]
-        public void GetLongestPolindrome_ReturnsSingleCharacterForTwoCharacterPolindrome()
+        public void GetLongestPolindrome2_ReturnsSingleCharacterForTwoCharacterPolindrome()
         {
-            Assert.Equal("a", PolindromUtilities.GetLongestPolindrome("ab"));
+            Assert.Equal("a", PolindromUtilities.GetLongestPolindrome2("ab"));
         }
 
         [Theory]
         [InlineData("aa")]
         [InlineData("aaa")]
         [InlineData("aaaa")]
-        public void GetLongestPolindrome_ReturnsFullStringForSameCharacters(string input)
+        public void GetLongestPolindrome2_ReturnsFullStringForSameCharacters(string input)
         {
-            Assert.Equal(input, PolindromUtilities.GetLongestPolindrome(input));
+            Assert.Equal(input, PolindromUtilities.GetLongestPolindrome2(input));
         }
 
         [Fact]
-        public void GetLongestPolindrome_Succeeds_ForSinglePolindrome()
+        public void GetLongestPolindrome2_Succeeds_ForSinglePolindrome()
         {
             const string polindrome = "abccba";
             const string input = "zza" + polindrome + "bbv";
-            Assert.Equal(polindrome, PolindromUtilities.GetLongestPolindrome(input));
+            Assert.Equal(polindrome, PolindromUtilities.GetLongestPolindrome2(input));
         }
 
         [Theory]
         [InlineData("_abba+cdbbdc-", "cdbbdc")]
         [InlineData("cbbd", "bb")]
-        public void GetLongestPolindrome_Succeeds_ForTwoPolindrome(string input, string expectedOutput)
+        public void GetLongestPolindrome2_Succeeds_ForTwoPolindrome(string input, string expectedOutput)
         {
-            Assert.Equal(expectedOutput, PolindromUtilities.GetLongestPolindrome(input));
+            Assert.Equal(expectedOutput, PolindromUtilities.GetLongestPolindrome2(input));
         }
     }
 }
