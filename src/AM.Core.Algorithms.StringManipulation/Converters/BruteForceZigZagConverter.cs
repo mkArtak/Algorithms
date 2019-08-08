@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Text;
 
-namespace AM.Core.Algorithms.StringManipulation
+namespace AM.Core.Algorithms.StringManipulation.Converters
 {
-    public static class ZigZagConverter
+    public class BruteForceZigZagConverter : IZigZagStringConverter
     {
         // This is a brute-force implementation for zig-zag convertion problem. Not optimal at all.
-        public static string Convert(string s, int numRows)
+        public string Convert(string s, int numRows)
         {
             if (numRows <= 0)
             {

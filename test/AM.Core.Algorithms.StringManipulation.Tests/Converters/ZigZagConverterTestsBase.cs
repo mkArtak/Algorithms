@@ -1,15 +1,23 @@
-﻿using Xunit;
+﻿using AM.Core.Algorithms.StringManipulation.Converters;
+using Xunit;
 
-namespace AM.Core.Algorithms.StringManipulation.Tests
+namespace AM.Core.Algorithms.StringManipulation.Tests.Converters
 {
-    public class ZigZagConverterTests
+    public abstract class ZigZagConverterTestsBase<T> where T : IZigZagStringConverter, new()
     {
+        private readonly T sut;
+
+        public ZigZagConverterTestsBase()
+        {
+            this.sut = new T();
+        }
+
         [Fact]
         public void Convert_SucceedsForTwoRows()
         {
             const string input = "abcdefg";
 
-            Assert.Equal("acegbdf", ZigZagConverter.Convert(input, 2));
+            Assert.Equal("acegbdf", sut.Convert(input, 2));
         }
 
         [Theory]
@@ -22,7 +30,7 @@ namespace AM.Core.Algorithms.StringManipulation.Tests
         [InlineData("PAYPALISHIRING", 5, "PHASIYIRPLIGAN")]
         public void Convert_Succeeds(string input, int numberOfRows, string expectedResult)
         {
-            Assert.Equal(expectedResult, ZigZagConverter.Convert(input, numberOfRows));
+            Assert.Equal(expectedResult, sut.Convert(input, numberOfRows));
         }
     }
 }
