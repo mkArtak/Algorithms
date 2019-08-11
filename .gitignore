@@ -24,3 +24,7 @@
 /src/AM.Core.Algorithms.Combinatorics/obj
 /test/AM.Core.Algorithms.Combinatorics.Tests/bin
 /test/AM.Core.Algorithms.Combinatorics.Tests/obj
+/src/AM.Core.Algorithms.Numbers/bin
+/src/AM.Core.Algorithms.Numbers/obj
+/test/AM.Core.Algorithms.Numbers.Tests/obj
+/test/AM.Core.Algorithms.Numbers.Tests/bin

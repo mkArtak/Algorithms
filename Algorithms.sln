@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26430.14
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29123.89
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{DCDCBE17-04F0-407C-A875-6A264F9B237B}"
 EndProject
@@ -28,9 +28,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AM.Core.Algorithms.DynamicP
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AM.Core.Algorithms.DynamicProgramming.Tests", "test\AM.Core.DynamicProgramming.Tests\AM.Core.Algorithms.DynamicProgramming.Tests.csproj", "{1B721BE2-B008-418D-A27A-9975F8B28D93}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AM.Core.Algorithms.Combinatorics", "src\AM.Core.Algorithms.Combinatorics\AM.Core.Algorithms.Combinatorics.csproj", "{9BB0803A-759A-4BEB-8EEB-658CA13E59FE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AM.Core.Algorithms.Combinatorics", "src\AM.Core.Algorithms.Combinatorics\AM.Core.Algorithms.Combinatorics.csproj", "{9BB0803A-759A-4BEB-8EEB-658CA13E59FE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AM.Core.Algorithms.Combinatorics.Tests", "test\AM.Core.Algorithms.Combinatorics.Tests\AM.Core.Algorithms.Combinatorics.Tests.csproj", "{A60AB50C-3DDC-4AD0-BD96-22E1C0ACB4D0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AM.Core.Algorithms.Combinatorics.Tests", "test\AM.Core.Algorithms.Combinatorics.Tests\AM.Core.Algorithms.Combinatorics.Tests.csproj", "{A60AB50C-3DDC-4AD0-BD96-22E1C0ACB4D0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AM.Core.Algorithms.Numbers", "src\AM.Core.Algorithms.Numbers\AM.Core.Algorithms.Numbers.csproj", "{66219CD2-FDEB-4445-B431-AC05A275266A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AM.Core.Algorithms.Numbers.Tests", "test\AM.Core.Algorithms.Numbers.Tests\AM.Core.Algorithms.Numbers.Tests.csproj", "{DCA99ED2-8DDF-4E52-8F5B-7FC27BAB712B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -78,6 +82,14 @@ Global
 		{A60AB50C-3DDC-4AD0-BD96-22E1C0ACB4D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A60AB50C-3DDC-4AD0-BD96-22E1C0ACB4D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A60AB50C-3DDC-4AD0-BD96-22E1C0ACB4D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{66219CD2-FDEB-4445-B431-AC05A275266A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66219CD2-FDEB-4445-B431-AC05A275266A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66219CD2-FDEB-4445-B431-AC05A275266A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66219CD2-FDEB-4445-B431-AC05A275266A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DCA99ED2-8DDF-4E52-8F5B-7FC27BAB712B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCA99ED2-8DDF-4E52-8F5B-7FC27BAB712B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DCA99ED2-8DDF-4E52-8F5B-7FC27BAB712B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DCA99ED2-8DDF-4E52-8F5B-7FC27BAB712B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -93,5 +105,10 @@ Global
 		{1B721BE2-B008-418D-A27A-9975F8B28D93} = {6CE9EBB5-1C0D-4A00-88E4-45AC673591F3}
 		{9BB0803A-759A-4BEB-8EEB-658CA13E59FE} = {DCDCBE17-04F0-407C-A875-6A264F9B237B}
 		{A60AB50C-3DDC-4AD0-BD96-22E1C0ACB4D0} = {6CE9EBB5-1C0D-4A00-88E4-45AC673591F3}
+		{66219CD2-FDEB-4445-B431-AC05A275266A} = {DCDCBE17-04F0-407C-A875-6A264F9B237B}
+		{DCA99ED2-8DDF-4E52-8F5B-7FC27BAB712B} = {6CE9EBB5-1C0D-4A00-88E4-45AC673591F3}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3E14C855-8281-4ABF-9170-3906BB8AE4F4}
 	EndGlobalSection
 EndGlobal
