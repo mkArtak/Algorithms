@@ -39,7 +39,7 @@
             }
 
             int startIndex = 0;
-            while (input[startIndex++] == ' ') ;
+            while (input[startIndex++] == ' ' && startIndex < input.Length) ;
             startIndex--;
 
             int sign = 1;

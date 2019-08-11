@@ -73,5 +73,13 @@ namespace AM.Core.Algorithms.Numbers.Tests
         {
             Assert.Equal(0, NumberUtilities.ToInt(input));
         }
+
+        [Theory]
+        [InlineData("--")]
+        [InlineData(" ")]
+        public void ToInt_ReturnsZeroForNonDigitsInput(string input)
+        {
+            Assert.Equal(0, NumberUtilities.ToInt(input));
+        }
     }
 }
