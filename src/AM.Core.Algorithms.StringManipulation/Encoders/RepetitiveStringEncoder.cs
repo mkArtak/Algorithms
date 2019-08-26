@@ -45,46 +45,43 @@ namespace AM.Core.Algorithms.StringManipulation.Encoders
                         currentIndex++;
                     }
 
-                    if (currentIndex < input.Length)
+                    int repetitions = Int32.Parse(input.Substring(sectionStart, currentIndex - sectionStart));
+                    if (currentIndex == input.Length || input[currentIndex] != '[')
                     {
-                        int repetitions = Int32.Parse(input.Substring(sectionStart, currentIndex - sectionStart));
-                        if (input[currentIndex] != '[')
-                        {
-                            throw new FormatException("The input string is invalid");
-                        }
-
-                        sectionStart = currentIndex + 1;
-                        Stack<char> section = new Stack<char>();
-                        section.Push('[');
-                        while (section.Count != 0)
-                        {
-                            currentIndex++;
-                            if (currentIndex == input.Length)
-                            {
-                                throw new FormatException("The input is improperly formatted");
-                            }
-
-                            char currentChar = input[currentIndex];
-                            if (currentChar == '[')
-                            {
-                                section.Push(currentChar);
-                            }
-                            else if (currentChar == ']')
-                            {
-                                section.Pop();
-                            }
-                        }
-
-                        /// This can be optimized further, if we don't initialize extra storage here for the substring.
-                        /// For that, this function should be updated to operate over char[] instead.
-                        string stringToRepeat = Decode(input.Substring(sectionStart, currentIndex - sectionStart));
-                        for (int i = 0; i < repetitions; i++)
-                        {
-                            result.Append(stringToRepeat);
-                        }
-
-                        currentIndex++;
+                        throw new FormatException("The input string is invalid");
                     }
+
+                    sectionStart = currentIndex + 1;
+                    Stack<char> section = new Stack<char>();
+                    section.Push('[');
+                    while (section.Count != 0)
+                    {
+                        currentIndex++;
+                        if (currentIndex == input.Length)
+                        {
+                            throw new FormatException("The input is improperly formatted");
+                        }
+
+                        char currentChar = input[currentIndex];
+                        if (currentChar == '[')
+                        {
+                            section.Push(currentChar);
+                        }
+                        else if (currentChar == ']')
+                        {
+                            section.Pop();
+                        }
+                    }
+
+                    /// This can be optimized further, if we don't initialize extra storage here for the substring.
+                    /// For that, this function should be updated to operate over char[] instead.
+                    string stringToRepeat = Decode(input.Substring(sectionStart, currentIndex - sectionStart));
+                    for (int i = 0; i < repetitions; i++)
+                    {
+                        result.Append(stringToRepeat);
+                    }
+
+                    currentIndex++;
                 }
             }
 

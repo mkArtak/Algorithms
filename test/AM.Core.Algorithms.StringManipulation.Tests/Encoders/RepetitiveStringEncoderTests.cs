@@ -1,4 +1,5 @@
 ﻿using AM.Core.Algorithms.StringManipulation.Encoders;
+using System;
 using Xunit;
 
 namespace AM.Core.Algorithms.StringManipulation.Tests.Encoders
@@ -37,6 +38,25 @@ namespace AM.Core.Algorithms.StringManipulation.Tests.Encoders
 
             RepetitiveStringEncoder sut = new RepetitiveStringEncoder();
             Assert.Equal("abcdaaaacdaaaaef", sut.Decode(input));
+        }
+
+        [Fact]
+        public void Decode_ThrowsForNullIput()
+        {
+            RepetitiveStringEncoder sut = new RepetitiveStringEncoder();
+            Assert.Throws<ArgumentNullException>(() => sut.Decode(null));
+        }
+
+        [Theory]
+        [InlineData("ab[cd]")]
+        [InlineData("ab2")]
+        [InlineData("ab2[")]
+        [InlineData("ab2]")]
+        [InlineData("ab2[df[]")]
+        public void Decode_ThrowsForInvalidInput(string invalidInput)
+        {
+            RepetitiveStringEncoder sut = new RepetitiveStringEncoder();
+            Assert.Throws<FormatException>(() => sut.Decode(invalidInput));
         }
     }
 }
