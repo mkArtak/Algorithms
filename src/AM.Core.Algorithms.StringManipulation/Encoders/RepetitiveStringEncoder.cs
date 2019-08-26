@@ -27,26 +27,31 @@ namespace AM.Core.Algorithms.StringManipulation.Encoders
                 return input;
             }
 
-            StringBuilder result = new StringBuilder();
-            int currentIndex = 0;
+            return Decode(input.ToCharArray(), 0, input.Length - 1);
+        }
 
-            while (currentIndex < input.Length)
+        private static string Decode(char[] input, int startIndex, int endIndex)
+        {
+            StringBuilder result = new StringBuilder();
+            int currentIndex = startIndex;
+
+            while (currentIndex <= endIndex)
             {
-                while (currentIndex < input.Length && IsLetter(input[currentIndex]))
+                while (currentIndex <= endIndex && IsLetter(input[currentIndex]))
                 {
                     result.Append(input[currentIndex++]);
                 }
 
-                if (currentIndex < input.Length)
+                if (currentIndex <= endIndex)
                 {
                     int sectionStart = currentIndex;
-                    while (currentIndex < input.Length && IsDigit(input[currentIndex]))
+                    while (currentIndex <= endIndex && IsDigit(input[currentIndex]))
                     {
                         currentIndex++;
                     }
 
-                    int repetitions = Int32.Parse(input.Substring(sectionStart, currentIndex - sectionStart));
-                    if (currentIndex == input.Length || input[currentIndex] != '[')
+                    int repetitions = ParseInt(input, sectionStart, currentIndex - sectionStart);
+                    if (currentIndex == sectionStart || currentIndex == endIndex + 1 || input[currentIndex] != '[')
                     {
                         throw new FormatException("The input string is invalid");
                     }
@@ -57,7 +62,7 @@ namespace AM.Core.Algorithms.StringManipulation.Encoders
                     while (section.Count != 0)
                     {
                         currentIndex++;
-                        if (currentIndex == input.Length)
+                        if (currentIndex == endIndex + 1)
                         {
                             throw new FormatException("The input is improperly formatted");
                         }
@@ -73,9 +78,7 @@ namespace AM.Core.Algorithms.StringManipulation.Encoders
                         }
                     }
 
-                    /// This can be optimized further, if we don't initialize extra storage here for the substring.
-                    /// For that, this function should be updated to operate over char[] instead.
-                    string stringToRepeat = Decode(input.Substring(sectionStart, currentIndex - sectionStart));
+                    string stringToRepeat = Decode(input, sectionStart, currentIndex - 1);
                     for (int i = 0; i < repetitions; i++)
                     {
                         result.Append(stringToRepeat);
@@ -86,6 +89,18 @@ namespace AM.Core.Algorithms.StringManipulation.Encoders
             }
 
             return result.ToString();
+        }
+
+        private static int ParseInt(char[] input, int start, int numberOfCharacters)
+        {
+            int result = 0;
+            for (int i = 0; i < numberOfCharacters; i++)
+            {
+                int charValue = input[start + i] - '0';
+                result += charValue * (int)Math.Pow(10, numberOfCharacters - i - 1);
+            }
+
+            return result;
         }
 
         public string Encode(string input)
