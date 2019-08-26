@@ -71,8 +71,10 @@
                     break;
 
                 int digitValue = currentChar - minDigitCode;
-                result = result * 10 + digitValue;
-
+                checked
+                {
+                    result = result * 10 + digitValue;
+                }
 
             } while (startIndex < input.Length);
 
