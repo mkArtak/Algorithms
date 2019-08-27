@@ -30,6 +30,11 @@ namespace AM.Core.Algorithms.StringManipulation.Encoders
             return Decode(input.ToCharArray(), 0, input.Length - 1);
         }
 
+        public string Encode(string input)
+        {
+            throw new NotImplementedException();
+        }
+
         private static string Decode(char[] input, int startIndex, int endIndex)
         {
             StringBuilder result = new StringBuilder();
@@ -57,9 +62,8 @@ namespace AM.Core.Algorithms.StringManipulation.Encoders
                     }
 
                     sectionStart = currentIndex + 1;
-                    Stack<char> section = new Stack<char>();
-                    section.Push('[');
-                    while (section.Count != 0)
+                    int num = 1;
+                    do
                     {
                         currentIndex++;
                         if (currentIndex == endIndex + 1)
@@ -70,13 +74,13 @@ namespace AM.Core.Algorithms.StringManipulation.Encoders
                         char currentChar = input[currentIndex];
                         if (currentChar == '[')
                         {
-                            section.Push(currentChar);
+                            num++;
                         }
                         else if (currentChar == ']')
                         {
-                            section.Pop();
+                            num--;
                         }
-                    }
+                    } while (num != 0);
 
                     string stringToRepeat = Decode(input, sectionStart, currentIndex - 1);
                     for (int i = 0; i < repetitions; i++)
@@ -101,11 +105,6 @@ namespace AM.Core.Algorithms.StringManipulation.Encoders
             }
 
             return result;
-        }
-
-        public string Encode(string input)
-        {
-            throw new NotImplementedException();
         }
 
         private static bool IsLetter(char c)
