@@ -1,4 +1,7 @@
-﻿namespace AM.Core.Algorithms.Numbers
+﻿using System;
+using System.Text;
+
+namespace AM.Core.Algorithms.Numbers
 {
     public static class NumberUtilities
     {
@@ -79,6 +82,41 @@
             } while (startIndex < input.Length);
 
             return result * sign;
+        }
+
+        /// <summary>
+        /// This is the implementation for LeetCode Integer-to-Roman problem: https://leetcode.com/problems/integer-to-roman/
+        /// </summary>
+        /// <param name="number">The number to convert</param>
+        /// <returns>The Roman representation of the input number</returns>
+        public static string ConvertIntToRoman(int number)
+        {
+            if (number < 1 || number > 3999)
+            {
+                throw new ArgumentOutOfRangeException();
+            }
+
+            StringBuilder sb = new StringBuilder();
+
+            int[] indicies = new[] { 1, 4, 5, 9, 10, 40, 50, 90, 100, 400, 500, 900, 1000 };
+            string[] map = new[] { "I", "IV", "V", "IX", "X", "XL", "L", "XC", "C", "CD", "D", "CM", "M" };
+            int mapIndex = indicies.Length - 1;
+            while (number > 0)
+            {
+                int repetitions = number / indicies[mapIndex];
+                if (repetitions > 0)
+                {
+                    number = number % indicies[mapIndex];
+                    for (int i = 0; i < repetitions; i++)
+                    {
+                        sb.Append(map[mapIndex]);
+                    }
+                }
+
+                mapIndex--;
+            }
+
+            return sb.ToString();
         }
     }
 }

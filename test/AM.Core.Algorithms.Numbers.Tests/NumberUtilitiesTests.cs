@@ -81,5 +81,15 @@ namespace AM.Core.Algorithms.Numbers.Tests
         {
             Assert.Equal(0, NumberUtilities.ToInt(input));
         }
+
+        [Theory]
+        [InlineData(1, "I")]
+        [InlineData(2, "II")]
+        [InlineData(100, "C")]
+        [InlineData(744, "DCCXLIV")]
+        public void ConvertIntToRoman_ConvertsCorrectly(int input, string expectedValue)
+        {
+            Assert.Equal(expectedValue, NumberUtilities.ConvertIntToRoman(input));
+        }
     }
 }

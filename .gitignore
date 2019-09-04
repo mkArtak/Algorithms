@@ -28,3 +28,7 @@
 /src/AM.Core.Algorithms.Numbers/obj
 /test/AM.Core.Algorithms.Numbers.Tests/obj
 /test/AM.Core.Algorithms.Numbers.Tests/bin
+/src/AM.Core.Algorithms.Puzzles/obj
+/src/AM.Core.Algorithms.Puzzles/bin
+/test/AM.Core.Algorithms.Puzzles.Tests/bin
+/test/AM.Core.Algorithms.Puzzles.Tests/obj
