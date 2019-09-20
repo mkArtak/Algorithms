@@ -34,29 +34,30 @@ namespace AM.Core.Algorithms.Puzzles
                 return new string[] { };
             }
 
-            return GetCombinations(string.Empty, ref digits, 0);
+            IList<string> result = new List<string>();
+            GetCombinations(string.Empty, digits, 0, result);
+
+            return result;
         }
 
-        private static IList<string> GetCombinations(string prefix, ref string digits, int index)
+        private static void GetCombinations(string prefix, string digits, int index, IList<string> results)
         {
             if (index == digits.Length)
-                return new[] { prefix };
+            {
+                results.Add(prefix);
+                return;
+            }
 
             if (map.TryGetValue(digits[index], out string prefixOptions))
             {
-                IList<string> result = new List<string>();
                 int nextIndex = index + 1;
 
                 foreach (char currentPrefix in prefixOptions)
                 {
-                    var combinations = GetCombinations(prefix + currentPrefix, ref digits, nextIndex);
-                    foreach (var childItem in combinations)
-                    {
-                        result.Add(childItem);
-                    }
+                    GetCombinations(prefix + currentPrefix, digits, nextIndex, results);
                 }
 
-                return result;
+                return;
             }
 
             throw new ArgumentException("Unexpected character detected");
