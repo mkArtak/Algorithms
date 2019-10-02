@@ -32,3 +32,7 @@
 /src/AM.Core.Algorithms.Puzzles/bin
 /test/AM.Core.Algorithms.Puzzles.Tests/bin
 /test/AM.Core.Algorithms.Puzzles.Tests/obj
+/src/AM.Core.Algorithms.LinkedLists/bin/Debug
+/src/AM.Core.Algorithms.LinkedLists/obj
+/test/AM.Core.Algorithms.LinkedLists.Tests/bin/Debug
+/test/AM.Core.Algorithms.LinkedLists.Tests/obj
