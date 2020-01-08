@@ -42,6 +42,56 @@ namespace AM.Core.Algorithms.LinkedLists.Tests
             Assert.Equal(expectedResult, actualArray);
         }
 
+        [Fact]
+        public void SwapNodesInPairs_Succeeds()
+        {
+            int[] nodes = new[] { 1, 2, 3, 4 };
+            int[] expectedResult = new int[] { 2, 1, 4, 3 };
+
+            ListNode root = ToLinkedList(nodes);
+
+            var actualResult = LinkedListUtilities.SwapNodesInPairs(root);
+            Assert.Equal<int>(expectedResult, ToArray(actualResult));
+        }
+
+        [Fact]
+        public void SwapNodesInPairs_SucceedsForOddNodes()
+        {
+            int[] nodes = new[] { 1, 2, 3};
+            int[] expectedResult = new int[] { 2, 1, 3 };
+
+            ListNode root = ToLinkedList(nodes);
+
+            var actualResult = LinkedListUtilities.SwapNodesInPairs(root);
+            Assert.Equal<int>(expectedResult, ToArray(actualResult));
+        }
+
+        [Fact]
+        public void SwapNodesInPairs_SwapsOnlyTwoNodes()
+        {
+            int[] nodes = new[] { 1, 2 };
+            int[] expectedResult = new int[] { 2, 1 };
+            ListNode root = ToLinkedList(nodes);
+
+            var actualResult = LinkedListUtilities.SwapNodesInPairs(root);
+            Assert.Equal<int>(expectedResult, ToArray(actualResult));
+        }
+
+        [Fact]
+        public void SwapNodesInPairs_ReturnsRootForSingleNodeList()
+        {
+            ListNode node = new ListNode(7);
+            ListNode swapped = LinkedListUtilities.SwapNodesInPairs(node);
+            Assert.Null(swapped.next);
+            Assert.Equal(node, swapped);
+        }
+
+        [Fact]
+        public void SwapNodesInPairs_ReturnsNullForNullNode()
+        {
+            Assert.Null(LinkedListUtilities.SwapNodesInPairs(null));
+        }
+
         private static ListNode ToLinkedList(int[] input)
         {
             ListNode root = new ListNode(input[0]);
