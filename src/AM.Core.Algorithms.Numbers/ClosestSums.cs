@@ -1,9 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace AM.Core.Algorithms.Numbers
 {
-    public static class Closest3Sum
+    public static class ClosestSums
     {
         /// <summary>
         /// This is implementation of the LeetCode 3Sum-closest problem: https://leetcode.com/problems/3sum-closest/submissions/
@@ -40,10 +41,6 @@ namespace AM.Core.Algorithms.Numbers
                     if (sum == target)
                     {
                         return target;
-
-                        //closestSum = sum;
-                        //leftIndex++;
-                        //rightIndex--;
                     }
 
                     if (sum < target)
@@ -67,6 +64,58 @@ namespace AM.Core.Algorithms.Numbers
                             result = sum;
                         }
                     }
+                }
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Finds all unique quadruples of numbers, which sum up to the given <paramref name="target"/> value.
+        /// </summary>
+        /// <param name="nums">The numbers array.</param>
+        /// <param name="target">The target value to sum up to.</param>
+        /// <leetcode>https://leetcode.com/problems/4sum</leetcode>
+        /// <returns>A list of all matching quadruples.</returns>
+        public static IList<IList<int>> FourSum(int[] nums, int target)
+        {
+            IList<IList<int>> result = new List<IList<int>>();
+            if (nums == null || nums.Length < 4)
+                return result;
+
+            int[] sortedNums = nums.OrderBy(i => i).ToArray();
+            for (int i = 0; i < sortedNums.Length - 3; i++)
+            {
+                if (i > 0 && sortedNums[i] == sortedNums[i - 1])
+                    continue;
+
+                for (int j = i + 1; j < sortedNums.Length - 2; j++)
+                {
+                    if (j > i + 1 && sortedNums[j] == sortedNums[j - 1])
+                        continue;
+
+                    int leftIndex = j + 1;
+                    int rightIndex = sortedNums.Length - 1;
+                    int pairSum = sortedNums[i] + sortedNums[j];
+                    do
+                    {
+                        int sum = pairSum + sortedNums[leftIndex] + sortedNums[rightIndex];
+                        if (sum == target)
+                        {
+                            int leftValue = sortedNums[leftIndex];
+                            result.Add(new List<int> { sortedNums[i], sortedNums[j], sortedNums[leftIndex], sortedNums[rightIndex] });
+                            while (sortedNums[++leftIndex] == leftValue && leftIndex < rightIndex) ;
+                            rightIndex--;
+                        }
+                        else if (sum < target)
+                        {
+                            leftIndex++;
+                        }
+                        else
+                        {
+                            rightIndex--;
+                        }
+                    } while (leftIndex < rightIndex);
                 }
             }
 
