@@ -118,5 +118,98 @@ namespace AM.Core.Algorithms.Numbers
 
             return sb.ToString();
         }
+        /// <summary>
+        /// Divides the given <paramref name="dividend"/> on the <paramref name="devisor"/> without using the `devision` operator.
+        /// </summary>
+        /// <param name="dividend">The number to divide.</param>
+        /// <param name="devisor">The number to divide on.</param>
+        /// <returns>The whole part of the devision result.</returns>
+        public static int DivideNumbers(int dividend, int devisor)
+        {
+            if (devisor == 0)
+            {
+                throw new ArgumentOutOfRangeException();
+            }
+
+            if (dividend == 0)
+            {
+                return 0;
+            }
+
+            if (devisor == 1)
+                return dividend;
+
+            if (devisor == -1)
+            {
+                try
+                {
+                    checked
+                    {
+                        return -dividend;
+                    }
+                }
+                catch (OverflowException)
+                {
+                    return Int32.MaxValue;
+                }
+            }
+
+            if (dividend == devisor)
+            {
+                return 1;
+            }
+
+            int result = DivideNumbers(dividend.ToString(), devisor);
+
+            return result;
+        }
+
+        public static int DivideNumbers(string divident, int devisor)
+        {
+            int result = 0;
+
+            bool isDividentNegative = IsNegative(divident, out divident);
+            bool isDevisorNegative = devisor < 0;
+            if (isDevisorNegative)
+            {
+                devisor = -devisor;
+            }
+
+            bool isResultNegative = isDividentNegative ^ isDevisorNegative;
+
+            int currentIndex = 0;
+            int currentNumber = 0;
+            while (currentIndex < divident.Length)
+            {
+                int currentDigit = Int32.Parse(divident[currentIndex++].ToString());
+                currentNumber = currentNumber * 10 + currentDigit;
+
+                int tmp = 0;
+                if (currentNumber == 0 || currentNumber >= devisor)
+                {
+                    tmp = currentNumber / devisor;
+                    currentNumber -= tmp * devisor;
+                }
+
+                result = result * 10 + tmp;
+            }
+
+            return isResultNegative ? -result : result;
+        }
+
+        private static bool IsNegative(string input, out string number)
+        {
+            const int minusCharacter = '-';
+
+            if (input[0] == minusCharacter)
+            {
+                number = input.Substring(1);
+                return true;
+            }
+
+            number = input;
+
+            return false;
+        }
     }
 }

@@ -91,5 +91,43 @@ namespace AM.Core.Algorithms.Numbers.Tests
         {
             Assert.Equal(expectedValue, NumberUtilities.ConvertIntToRoman(input));
         }
+
+        [Theory]
+        [InlineData(7, 15, 2)]
+        [InlineData(-2, 7, -3)]
+        [InlineData(0, 1, 2)]
+        [InlineData(-1, -1, 1)]
+        [InlineData(2, -2147483648, -1017100424)]
+        [InlineData(-5, -5, 1)]
+        [InlineData(1073741823, 2147483647, 2)]
+        [InlineData(-2147483648, -2147483648, 1)]
+        public void DivideNumbers(int result, int divider, int divisor)
+        {
+            Assert.Equal(result, NumberUtilities.DivideNumbers(divider, divisor));
+        }
+
+        [Fact]
+        public void DivideNumbers_ResultsInOneForSameArguments()
+        {
+            Assert.Equal(1, NumberUtilities.DivideNumbers(42, 42));
+        }
+
+        [Fact]
+        public void DivideNumbers_ResultsInNegativeOneForNegativeDivident()
+        {
+            Assert.Equal(-1, NumberUtilities.DivideNumbers(-42, 42));
+        }
+
+        [Fact]
+        public void DivideNumbers_ResultsInNegativeOneForNegativeDivisor()
+        {
+            Assert.Equal(-1, NumberUtilities.DivideNumbers(42, -42));
+        }
+
+        [Fact]
+        public void DivideNumbers_HandlesOverflow()
+        {
+            Assert.Equal(Int32.MaxValue, NumberUtilities.DivideNumbers(Int32.MinValue, -1));
+        }
     }
 }

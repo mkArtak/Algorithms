@@ -76,6 +76,61 @@ namespace AM.Core.Algorithms.StringManipulation
             Reverse(data, 0, data.Length - 1);
         }
 
+        public static string ReverseVowels(string s)
+        {
+            if (s == null)
+                throw new ArgumentNullException(nameof(s));
+            if (s.Length <= 1)
+                return s;
+
+            char[] chars = s.ToCharArray();
+
+            int startIndex = 0;
+            int endIndex = s.Length - 1;
+
+            do
+            {
+                while (!IsVowel(s[startIndex]) && startIndex < endIndex)
+                    startIndex++;
+
+                while (!IsVowel(s[endIndex]) && endIndex > startIndex)
+                    endIndex--;
+
+                if (startIndex < endIndex)
+                {
+                    char tmp = chars[startIndex];
+                    chars[startIndex] = s[endIndex];
+                    chars[endIndex] = tmp;
+
+                    startIndex++;
+                    endIndex--;
+                }
+            } while (startIndex < endIndex);
+
+            return new string(chars);
+
+        }
+
+        private static bool IsVowel(char c)
+        {
+            switch (c)
+            {
+                case 'a':
+                case 'A':
+                case 'e':
+                case 'E':
+                case 'i':
+                case 'I':
+                case 'o':
+                case 'O':
+                case 'u':
+                case 'U':
+                    return true;
+            }
+
+            return false;
+        }
+
         private static void Reverse<T>(T[] data, int startIndex, int endIndex)
         {
             int index = startIndex;

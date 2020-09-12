@@ -14,7 +14,7 @@ namespace AM.Core.Algorithms.Puzzles.Tests
 
         [Theory]
         [InlineData(2, new[] { 1, 2, 3 })]
-        public void GetMaxVolume_SucceedsForFlatHeights(int volume, params int[] heights)
+        public void GetMaxVolume_SucceedsForFlatHeights_Custom(int volume, int[] heights)
         {
             Assert.Equal(volume, new RainWaterContainer().GetMaxVolume(heights));
         }

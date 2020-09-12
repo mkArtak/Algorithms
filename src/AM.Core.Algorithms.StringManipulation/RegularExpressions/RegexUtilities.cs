@@ -4,66 +4,93 @@ using System.Text;
 
 namespace AM.Core.Algorithms.StringManipulation.RegularExpressions
 {
-    public class RegexUtilities
+    public class RegexUtilities // WIP
     {
+        private static readonly char[] patternNormalizationArray = new char[] { WellKnownPatternCharacters.Star };
+
+        /// This algorithm won't support the `.*` case. need to 
         /// <summary>
         /// Validates, whether the <code cref="input"/> string matches the specified <see cref="pattern"/>.
         /// </summary>
         /// <param name="input">The input string to match</param>
         /// <param name="pattern">The regular expression pattern.</param>
         /// <returns>true, if the string matches the pattern. false - otherwise</returns>
-        /// <remarks>The pattern supports any characters from a-z as well as characters `.` and `*` indicating a single and multi-character match.</remarks>
+        /// <remarks>The pattern supports any characters from a-z as well as characters `.` and `*` indicating a single and multi-character match.
+        /// Below is the algorith this method uses to match the pattern.
+        ///          1. Normalize the pattern to simplify processing(Ex. 'c*cc*cc' => 'cccc*')
+        ///          2. Split the pattern by '*' into multiple pattern sections
+        ///          3. Starting from the last pattern section, try matching it from the end of the string.
+        ///          4. If current section match, remember the position from the end, till which the input string matched with the pattern, and repeat the same evaluation process with the next pattern section(from the end).
+        ///          5. If a section didn't match, return false, as that means the input string didn't match the pattern.
+        ///          6. After going through all the pattern sections and all matching make sure that we went through all the input string and no characters left to be evaluated.
+        ///          7. If any characters left to be evaluated, pattern didn't match.
+        ///          8. Otherwise we've got a successful match.
+        /// </remarks>
         public static bool IsMatch(string input, string pattern)
         {
-            // Algorithm 1:
-            // Each character in pattern represents an expecation.
-            // Go through each one and see whether there is a match on the input string
-
-            if (input == null || pattern == null)
-            {
+            if (pattern == null)
                 throw new ArgumentNullException();
+
+            if (pattern.Length == 0)
+                return true;
+
+            if (pattern[0] == WellKnownPatternCharacters.Star)
+                throw new ArgumentException("Pattern string cannot start with a '*'");
+
+            var patternSections = NormalizePattern(pattern);
+            int inputMatchingPosition = input.Length - 1;
+            for (int i = patternSections.Length - 1; i > 0; i--)
+            {
+                if (!SectionMatchesPattern(input, inputMatchingPosition, patternSections[i], out int newEndPosition))
+                {
+                    return false;
+                }
+
+                inputMatchingPosition = newEndPosition;
             }
 
-            if (input.Length == 0)
+            return inputMatchingPosition == 0;
+        }
+
+        /// <summary>
+        /// Validates whether a matching string found ending at the <paramref name="endIndex"/> position in the <paramref name="input"/> string.
+        /// </summary>
+        /// <param name="input">The input string to validate for a match.</param>
+        /// <param name="endIndex">The end position in the <paramref name="input"/> string where a match should be looked at.</param>
+        /// <param name="patternSection">A sectoin of a regular expression pattern, which ends with a <see cref="WellKnownPatternCharacters.Star"/> character.</param>
+        /// <param name="matchStartPosition">If a match is found, this parameter will be set to the value of start position of the found match.</param>
+        /// <returns>true, if a match is found. false - otherwise.</returns>
+        private static bool SectionMatchesPattern(string input, int endIndex, string patternSection, out int matchStartPosition)
+        {
+            int currentPatternIndex = patternSection.Length;
+            int currentInputIndex = endIndex;
+            while (input[--currentInputIndex] == input[endIndex]) ;
+            int repetitionsInInput = endIndex - currentInputIndex - 1;
+            while (patternSection[patternSection.Length - 1] == patternSection[--currentPatternIndex]) ;
+            int repetitionsRequiredByPattern = patternSection.Length - 1 - currentPatternIndex;
+            if (repetitionsRequiredByPattern > repetitionsInInput)
             {
-                return pattern.Length == 0;
-            }
-            else if (pattern.Length == 0)
-            {
+                matchStartPosition = -1;
                 return false;
             }
 
-            if (pattern[0] == '*')
+            if (patternSection.Length - 1 - repetitionsRequiredByPattern != endIndex - currentInputIndex)
             {
-                throw new ArgumentException("* not allowed as the first character of a pattern, as it has no meaning");
+                matchStartPosition = -1;
+                return false;
             }
 
-            int currentInputIndex = 0;
-            int currentPatternIndex = 0;
-
-            for (int i = 0; i < input.Length; i++)
+            for (; currentPatternIndex > 0 && currentInputIndex > 0; currentPatternIndex--)
             {
-                if(!CharactersMatch(input[i], pattern, currentPatternIndex))
+                if (!CharactersMatch(input[currentInputIndex--], patternSection, currentPatternIndex))
                 {
-
+                    matchStartPosition = -1;
+                    return false;
                 }
             }
 
-
-            // Algorithm 2:
-            // abccccdf
-            // abc*.cdf
-            // Algorithm
-            // 1. Split the pattern by '*'
-            // 2. for each `non-pattern` section - map to the input string appropriate section and validate
-            // 3. If succeeds, map the * sections with leftover pieces and validate (those sould all be of the same character or empty
-
+            matchStartPosition = currentInputIndex;
             return true;
-        }
-
-        private static bool IsSpecialCharacter(char c)
-        {
-            return c == '*' || c == '.';
         }
 
         private static bool CharactersMatch(char input, string pattern, int patternIndex)
@@ -71,11 +98,11 @@ namespace AM.Core.Algorithms.StringManipulation.RegularExpressions
             bool result = false;
 
             char patternChar = pattern[patternIndex];
-            if (patternChar == '.')
+            if (patternChar == WellKnownPatternCharacters.Dot)
             {
                 result = true;
             }
-            else if (patternChar == '*')
+            else if (patternChar == WellKnownPatternCharacters.Star)
             {
                 result = CharactersMatch(input, pattern, patternIndex - 1);
             }
@@ -85,6 +112,25 @@ namespace AM.Core.Algorithms.StringManipulation.RegularExpressions
             }
 
             return result;
+        }
+
+        /// <summary>
+        /// Splits the pattern into sections by the '*' character.
+        /// </summary>
+        /// <param name="pattern">The pattern to split into sections.</param>
+        /// <returns>Sections of the pattern</returns>
+        /// <remarks>This method removes the '*' characters. This is key as this normalizes the pattern. The following '**' example does make no sense as it can be replaced with a single '*' only.</remarks>
+        private static string[] NormalizePattern(string pattern)
+        {
+            // TODO: Normalize a pattern like this 'cc*cccc*c*' to become simple 'ccccc*', as these are equal patterns
+            return pattern.Split(patternNormalizationArray, StringSplitOptions.RemoveEmptyEntries);
+        }
+
+        private static class WellKnownPatternCharacters
+        {
+            public static char Star = '*';
+
+            public static char Dot = '.';
         }
     }
 }

@@ -61,5 +61,11 @@ namespace AM.Core.Algorithms.StringManipulation.Tests
         {
             Assert.Throws<ArgumentNullException>(() => StringUtilities.ReverseByWords(null));
         }
+
+        [Fact]
+        public void ReversVowels_TwoDigitInput_Succeeds()
+        {
+            Assert.Equal("Aa", StringUtilities.ReverseVowels("aA"));
+        }
     }
 }
