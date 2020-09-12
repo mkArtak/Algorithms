@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text;
 
 namespace AM.Core.Algorithms.Numbers
@@ -118,6 +119,53 @@ namespace AM.Core.Algorithms.Numbers
 
             return sb.ToString();
         }
+
+        public static int ConvertRomanToInt(string roman)
+        {
+            var map = new Dictionary<string, int> {
+                {"I", 1 },
+                {"IV", 4 },
+                {"V", 5},
+                {"IX", 9},
+                {"X", 10},
+                {"XL", 40},
+                {"L", 50},
+                {"XC", 90},
+                {"C", 100},
+                {"CD", 400},
+                {"D", 500},
+                {"CM", 900},
+                {"M", 1000},
+            };
+
+            int result = 0;
+
+            int currentIndex = 0;
+            while (currentIndex < roman.Length - 1)
+            {
+                // Test for double digit option
+                if (map.TryGetValue($"{roman[currentIndex]}{roman[currentIndex + 1]}", out var value))
+                {
+                    currentIndex += 2;
+                }
+                else if (map.TryGetValue(roman[currentIndex].ToString(), out value))
+                {
+                    currentIndex++;
+                }
+                else
+                    throw new ArgumentException("Unknown roman character");
+
+                result += value;
+            }
+
+            if (currentIndex < roman.Length)
+            {
+                result += map[roman[roman.Length - 1].ToString()];
+            }
+
+            return result;
+        }
+
         /// <summary>
         /// Divides the given <paramref name="dividend"/> on the <paramref name="devisor"/> without using the `devision` operator.
         /// </summary>

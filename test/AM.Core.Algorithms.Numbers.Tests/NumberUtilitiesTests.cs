@@ -93,6 +93,13 @@ namespace AM.Core.Algorithms.Numbers.Tests
         }
 
         [Theory]
+        [InlineData("DCCXLIV", 744)]
+        public void ConvertRomanToInt_Succeeds(string roman, int expectedResult)
+        {
+            Assert.Equal(expectedResult, NumberUtilities.ConvertRomanToInt(roman));
+        }
+
+        [Theory]
         [InlineData(7, 15, 2)]
         [InlineData(-2, 7, -3)]
         [InlineData(0, 1, 2)]
