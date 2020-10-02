@@ -2,11 +2,11 @@
 Implementation of well-known algorithms in C#.
 Some of those algorithms appear during software engineering interviews.
 
-##Data structures:
+## Data structures:
 - BST
 - Heap
 
-##Algorithms:
+## Algorithms:
 - Find the longest polindromic substring
 
 ### Sorting
