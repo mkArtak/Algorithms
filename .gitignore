@@ -36,3 +36,7 @@
 /src/AM.Core.Algorithms.LinkedLists/obj
 /test/AM.Core.Algorithms.LinkedLists.Tests/bin/Debug
 /test/AM.Core.Algorithms.LinkedLists.Tests/obj
+/src/AM.Core.Algorithms.Arrays/bin
+/src/AM.Core.Algorithms.Arrays/obj
+/test/AM.Core.Algorithms.Arrays.Tests/bin
+/test/AM.Core.Algorithms.Arrays.Tests/obj

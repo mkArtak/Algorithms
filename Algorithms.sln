@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29123.89
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{DCDCBE17-04F0-407C-A875-6A264F9B237B}"
 EndProject
@@ -43,6 +43,10 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AM.Core.Algorithms.LinkedLists", "src\AM.Core.Algorithms.LinkedLists\AM.Core.Algorithms.LinkedLists.csproj", "{C13401C0-D03E-4229-B0B4-DA5B21E1DA88}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AM.Core.Algorithms.LinkedLists.Tests", "test\AM.Core.Algorithms.LinkedLists.Tests\AM.Core.Algorithms.LinkedLists.Tests.csproj", "{40F41EE8-1041-473D-85AB-E3CDE255C2B8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AM.Core.Algorithms.Arrays", "src\AM.Core.Algorithms.Arrays\AM.Core.Algorithms.Arrays.csproj", "{DAD518B1-695B-4393-A2FE-C73F79763948}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AM.Core.Algorithms.Arrays.Tests", "test\AM.Core.Algorithms.Arrays.Tests\AM.Core.Algorithms.Arrays.Tests.csproj", "{D1E3AD72-8451-454D-9BBA-794B0AEB49D7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -114,6 +118,14 @@ Global
 		{40F41EE8-1041-473D-85AB-E3CDE255C2B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{40F41EE8-1041-473D-85AB-E3CDE255C2B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{40F41EE8-1041-473D-85AB-E3CDE255C2B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DAD518B1-695B-4393-A2FE-C73F79763948}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DAD518B1-695B-4393-A2FE-C73F79763948}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DAD518B1-695B-4393-A2FE-C73F79763948}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DAD518B1-695B-4393-A2FE-C73F79763948}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D1E3AD72-8451-454D-9BBA-794B0AEB49D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D1E3AD72-8451-454D-9BBA-794B0AEB49D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D1E3AD72-8451-454D-9BBA-794B0AEB49D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D1E3AD72-8451-454D-9BBA-794B0AEB49D7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -135,6 +147,8 @@ Global
 		{8F4F18BC-7B1D-4033-8646-F9A18D3FACF9} = {6CE9EBB5-1C0D-4A00-88E4-45AC673591F3}
 		{C13401C0-D03E-4229-B0B4-DA5B21E1DA88} = {DCDCBE17-04F0-407C-A875-6A264F9B237B}
 		{40F41EE8-1041-473D-85AB-E3CDE255C2B8} = {6CE9EBB5-1C0D-4A00-88E4-45AC673591F3}
+		{DAD518B1-695B-4393-A2FE-C73F79763948} = {DCDCBE17-04F0-407C-A875-6A264F9B237B}
+		{D1E3AD72-8451-454D-9BBA-794B0AEB49D7} = {6CE9EBB5-1C0D-4A00-88E4-45AC673591F3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3E14C855-8281-4ABF-9170-3906BB8AE4F4}
