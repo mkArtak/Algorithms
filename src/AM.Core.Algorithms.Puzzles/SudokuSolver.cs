@@ -39,7 +39,7 @@ namespace AM.Core.Algorithms.Puzzles
             {
                 var cell = emptyCells[i];
 
-                var options = FindOptionsForCell(board, cell.Row, cell.Col);
+                var options = FindOptionsForCell(board, cell);
 
                 foreach (var option in options)
                 {
@@ -66,7 +66,7 @@ namespace AM.Core.Algorithms.Puzzles
                 for (int i = 0; i < emptyCells.Count; i++)
                 {
                     var cell = emptyCells[i];
-                    char[] options = FindOptionsForCell(board, cell.Row, cell.Col);
+                    char[] options = FindOptionsForCell(board, cell);
                     if (options.Length == 0)
                     {
                         return false;
@@ -103,12 +103,12 @@ namespace AM.Core.Algorithms.Puzzles
 
         private static bool IsCellEmpty(char cellValue) => cellValue == '.';
 
-        private static char[] FindOptionsForCell(char[][] board, int row, int col)
+        private static char[] FindOptionsForCell(char[][] board, Cell cell)
         {
             List<char> result = new List<char>();
             foreach (var option in globalOptions)
             {
-                if (IsValueAllowedInRow(board, row, option) && IsValueAllowedInColumn(board, col, option) && IsValueAllowedInBox(board, row, col, option))
+                if (IsValueAllowedInRow(board, cell.Row, option) && IsValueAllowedInColumn(board, cell.Col, option) && IsValueAllowedInBox(board, cell, option))
                 {
                     result.Add(option);
                 }
@@ -139,10 +139,10 @@ namespace AM.Core.Algorithms.Puzzles
             return true;
         }
 
-        private static bool IsValueAllowedInBox(char[][] grid, int row, int col, char option)
+        private static bool IsValueAllowedInBox(char[][] grid, Cell cell, char option)
         {
-            var boxRowStart = GetSubBoxStart(row);
-            var boxColStart = GetSubBoxStart(col);
+            var boxRowStart = GetSubBoxStart(cell.Row);
+            var boxColStart = GetSubBoxStart(cell.Col);
             for (var i = 0; i < 3; i++)
                 for (var j = 0; j < 3; j++)
                 {
