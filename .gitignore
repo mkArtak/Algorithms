@@ -40,3 +40,6 @@
 /src/AM.Core.Algorithms.Arrays/obj
 /test/AM.Core.Algorithms.Arrays.Tests/bin
 /test/AM.Core.Algorithms.Arrays.Tests/obj
+/src/AM.Core.Algorithms.Trees/obj
+/test/AM.Core.Algorithms.Trees.Tests/obj
+/test/AM.Core.Algorithms.Trees.Tests/bin/Debug/net8.0
