@@ -36,4 +36,46 @@ public static class BinaryTreeUtilities
 
         return root;
     }
+
+    public static void FlattenBinaryTree(BinaryTreeNode<int> root)
+    {
+        _ = FlattenAndTakeLast(root);
+    }
+
+    private static BinaryTreeNode<int> FlattenAndTakeLast(BinaryTreeNode<int> node)
+    {
+        if (node is null)
+            return null;
+
+        if (node.Left is null && node.Right is null)
+            return node;
+
+        var rightRoot = node.Right;
+        var leftRoot = node.Left;
+
+        // Left subtree is empty
+        if (leftRoot is null)
+        {
+            var result = FlattenAndTakeLast(rightRoot);
+            return result;
+        }
+
+        // Right subtree is empty but left subtree is available
+        if (rightRoot is null)
+        {
+            node.Right = leftRoot;
+            node.Left = null;
+            var result = FlattenAndTakeLast(leftRoot);
+            return result;
+        }
+
+        // Both left and right subtrees are present
+        node.Right = leftRoot;
+        node.Left = null;
+        var leftTail = FlattenAndTakeLast(leftRoot);
+        leftTail.Right = rightRoot;
+        var rightTail = FlattenAndTakeLast(rightRoot);
+
+        return rightTail;
+    }
 }
