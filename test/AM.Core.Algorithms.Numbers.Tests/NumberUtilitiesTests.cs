@@ -1,4 +1,3 @@
-using System;
 using Xunit;
 
 namespace AM.Core.Algorithms.Numbers.Tests

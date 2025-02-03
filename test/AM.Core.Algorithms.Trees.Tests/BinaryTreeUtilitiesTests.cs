@@ -41,7 +41,7 @@ public class BinaryTreeUtilitiesTests
         Assert.IsNull(tree.Left);
         Assert.IsNull(tree.Right);
 
-        Assert.Equals(5, tree.Value);
+        Assert.AreEqual(5, tree.Value);
     }
 
     [TestMethod]
