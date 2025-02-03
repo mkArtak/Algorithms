@@ -48,7 +48,7 @@ public class BinaryTreeUtilitiesTests
     public void FlattenBinaryTree_ReturnsFlattenedTree()
     {
         var root = new BinaryTreeNode<int>(1);
-        
+
         root.Left = new BinaryTreeNode<int>(2);
         root.Left.Left = new BinaryTreeNode<int>(3);
         root.Left.Right = new BinaryTreeNode<int>(4);
@@ -80,5 +80,23 @@ public class BinaryTreeUtilitiesTests
         Assert.IsNull(root.Left);
         Assert.IsNull(root.Right.Left);
         Assert.IsNull(root.Right.Right);
+    }
+
+    [TestMethod]
+    public void SumNumbers_ReturnsNodeValueForASingleNodeTree()
+    {
+        var node = new BinaryTreeNode<int>(5);
+
+        Assert.AreEqual(5, BinaryTreeUtilities.SumNumbers(node));
+    }
+
+    [TestMethod]
+    public void SumNumbers_Succeeds()
+    {
+        var root = new BinaryTreeNode<int>(1);
+        root.Left = new BinaryTreeNode<int>(2);
+        root.Right = new BinaryTreeNode<int>(3);
+
+        Assert.AreEqual(25, BinaryTreeUtilities.SumNumbers(root));
     }
 }

@@ -2,7 +2,7 @@
 
 namespace AM.Core.Algorithms.Trees;
 
-public class BinaryTree<T>
+public static class BinaryTree<T>
 {
     public static int FindTreeWidth(BinaryTreeNode<T> root)
     {

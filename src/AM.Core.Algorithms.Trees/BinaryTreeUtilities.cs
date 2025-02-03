@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace AM.Core.Algorithms.Trees;
+﻿namespace AM.Core.Algorithms.Trees;
 
 public static class BinaryTreeUtilities
 {
@@ -24,7 +18,7 @@ public static class BinaryTreeUtilities
     private static BinaryTreeNode<int> RestoreFromArrays(Span<int> preorder, Span<int> inorder)
     {
         var rootValue = preorder[0];
-        BinaryTreeNode<int> root = new BinaryTreeNode<int>(rootValue);
+        var root = new BinaryTreeNode<int>(rootValue);
         var separatorIndex = inorder.IndexOf(rootValue);
         var leftSubtreeElementCount = separatorIndex;
         if (leftSubtreeElementCount > 0)
@@ -37,12 +31,12 @@ public static class BinaryTreeUtilities
         return root;
     }
 
-    public static void FlattenBinaryTree(BinaryTreeNode<int> root)
+    public static void FlattenBinaryTree<T>(BinaryTreeNode<T> root)
     {
         _ = FlattenAndTakeLast(root);
     }
 
-    private static BinaryTreeNode<int> FlattenAndTakeLast(BinaryTreeNode<int> node)
+    private static BinaryTreeNode<T> FlattenAndTakeLast<T>(BinaryTreeNode<T> node)
     {
         if (node is null)
             return null;
@@ -77,5 +71,27 @@ public static class BinaryTreeUtilities
         var rightTail = FlattenAndTakeLast(rightRoot);
 
         return rightTail;
+    }
+
+    public static int SumNumbers(BinaryTreeNode<int> root)
+    {
+        return SumNumbersAtLevel(root, 0);
+    }
+
+    private static int SumNumbersAtLevel(BinaryTreeNode<int> root, int sum)
+    {
+        var currentTreeValue = sum * 10 + root.Value;
+        var result = 0;
+        if (root.Left is not null)
+            result += SumNumbersAtLevel(root.Left, currentTreeValue);
+
+        if (root.Right is not null)
+            result += SumNumbersAtLevel(root.Right, currentTreeValue);
+
+        // If this is a leaf node, then we should return the value of the full path.
+        if (result == 0)
+            result = currentTreeValue;
+
+        return result;
     }
 }
