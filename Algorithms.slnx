@@ -1,0 +1,29 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path="README.md" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src/AM.Core.Algorithms.Arrays/AM.Core.Algorithms.Arrays.csproj" />
+    <Project Path="src/AM.Core.Algorithms.Combinatorics/AM.Core.Algorithms.Combinatorics.csproj" />
+    <Project Path="src/AM.Core.Algorithms.DynamicProgramming/AM.Core.Algorithms.DynamicProgramming.csproj" />
+    <Project Path="src/AM.Core.Algorithms.LinkedLists/AM.Core.Algorithms.LinkedLists.csproj" />
+    <Project Path="src/AM.Core.Algorithms.Numbers/AM.Core.Algorithms.Numbers.csproj" />
+    <Project Path="src/AM.Core.Algorithms.Puzzles/AM.Core.Algorithms.Puzzles.csproj" />
+    <Project Path="src/AM.Core.Algorithms.Search/AM.Core.Algorithms.Search.csproj" />
+    <Project Path="src/AM.Core.Algorithms.StringManipulation/AM.Core.Algorithms.StringManipulation.csproj" />
+    <Project Path="src/AM.Core.Algorithms.Trees/AM.Core.Algorithms.Trees.csproj" />
+    <Project Path="src/AM.Core.DataStructures/AM.Core.DataStructures.csproj" />
+  </Folder>
+  <Folder Name="/test/">
+    <Project Path="test/AM.Core.Algorithms.Arrays.Tests/AM.Core.Algorithms.Arrays.Tests.csproj" />
+    <Project Path="test/AM.Core.Algorithms.Combinatorics.Tests/AM.Core.Algorithms.Combinatorics.Tests.csproj" />
+    <Project Path="test/AM.Core.Algorithms.LinkedLists.Tests/AM.Core.Algorithms.LinkedLists.Tests.csproj" />
+    <Project Path="test/AM.Core.Algorithms.Numbers.Tests/AM.Core.Algorithms.Numbers.Tests.csproj" />
+    <Project Path="test/AM.Core.Algorithms.Puzzles.Tests/AM.Core.Algorithms.Puzzles.Tests.csproj" />
+    <Project Path="test/AM.Core.Algorithms.StringManipulation.Tests/AM.Core.Algorithms.StringManipulation.Tests.csproj" />
+    <Project Path="test/AM.Core.Algorithms.Tests/AM.Core.Algorithms.Tests.csproj" />
+    <Project Path="test/AM.Core.Algorithms.Trees.Tests/AM.Core.Algorithms.Trees.Tests.csproj" />
+    <Project Path="test/AM.Core.DatatStructures.Tests/AM.Core.DataStructures.Tests.csproj" />
+    <Project Path="test/AM.Core.DynamicProgramming.Tests/AM.Core.Algorithms.DynamicProgramming.Tests.csproj" />
+  </Folder>
+</Solution>
